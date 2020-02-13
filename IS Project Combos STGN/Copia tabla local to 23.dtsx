@@ -1,0 +1,60 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="7/24/2019 7:19:30 AM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="LAPTOP-MFGK5CPU"
+  DTS:CreatorName="LAPTOP-MFGK5CPU\fvalb"
+  DTS:DTSID="{15523F16-D4C6-4176-9382-1F3700E3614D}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="15.0.1100.123"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Package1"
+  DTS:PackageType="5"
+  DTS:VersionBuild="3"
+  DTS:VersionGUID="{69DC52B3-D685-494A-BBE3-662A9D9CF5A6}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[lukerVen 03 Read]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{37e2bfe5-5809-4240-a65f-ac7ace9a6b5a}"
+      DTS:ObjectName="lukerVen 03 Read">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=svidblukmz03;User ID=sa;Initial Catalog=HBAVENNAL;Provider=SQLNCLI11.1;Persist Security Info=True;Auto Translate=False;Application Name=SSIS-Package1-{B8F3234A-F7D6-42AF-B788-027A8DF2149F}SVIDBLUKMZ03.lukerFin;">
+          <DTS:Password
+            DTS:Name="Password"
+            Sensitive="1"
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAfEBfL6Z+60iO2tnUvCZ+IwAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAABK52FotqXlYylrWjM2gtzKZBFHavT0TilxyWmlAVCE9AAAAAAOgAAAAAIAACAAAAA/rUTTBHhD8CMBW2dXjNVpZQXILTsIvtTXPkoym8SaTyAAAAD1XKwNwz3abJjcVI/EuiAH1fW+tCeJ1FNICB5GhMaY2EAAAACMZX9NskvoA2RIdzMZYVwQtG6LbhCqwI9JJbii1rbSBol/6QZXIb5OvWMzj65JQMC07kjOpTMri0exNgyS07Q5</DTS:Password>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[lukerVen 23 w]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{E36F3AB0-DFC1-4050-BF3C-8909FE389C41}"
+      DTS:ObjectName="lukerVen 23 w">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=192.168.5.23\B2C;User ID=ASSUser;Initial Catalog=lukerVen;Provider=SQLNCLI11.1;Persist Security Info=True;Auto Translate=False;Application Name=SSIS-Package1-{B8F3234A-F7D6-42AF-B788-027A8DF2149F}SVIDBLUKMZ03.lukerFin;">
+          <DTS:Password
+            DTS:Name="Password"
+            Sensitive="1"
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAfEBfL6Z+60iO2tnUvCZ+IwAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAADoob8PrKH9z+HmBLxuJXERxV4KrwtRbIcGLGQRAm7oHwAAAAAOgAAAAAIAACAAAACJqBNUL7DOxQ1HU9pr44mjWK6yDZ/oftXQyfCaC3VK9yAAAACoPNlQcFzuhb4oANVbq7CKj9iNy/Rz9Nq4XEMVkm226EAAAABliuWXh1MIdmNGj8yLrgB8hhazSZgpE15UYQWjvT1NOVyn1/0ZmmEp5QMHylpmSfKSHKGlXYpcj+Uf7sAi9haN</DTS:Password>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables />
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--Esta sección CDATA contiene la información de diseño del paquete. Esta sección incluye información como, por ejemplo, las coordenadas (x,y), el ancho y el alto.-->
+<!--Si edita manualmente esta sección y comete un error, puede eliminarlo. -->
+<!--El paquete podrá cargarse normalmente, pero se perderá la información de diseño anterior y el diseñador reorganizará los elementos automáticamente en la superficie de diseño.-->
+<Objects
+  Version="8">
+  <!--Cada uno de los nodos siguientes contiene propiedades que no afectan al comportamiento en tiempo de ejecución.-->
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

@@ -1,0 +1,1163 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="5/17/2018 2:42:02 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="SVIDBLUKMZ03"
+  DTS:CreatorName="SVIDBLUKMZ03\Administrator"
+  DTS:DTSID="{34C4971A-5775-49D9-8D2B-8705CC2011AE}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="15.0.1100.123"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Abako_BO"
+  DTS:PackageType="5"
+  DTS:VersionBuild="72"
+  DTS:VersionGUID="{BDF0231B-5E03-44D2-93B0-4DA08C419EB9}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Abako 1]"
+      DTS:CreationName="FILE"
+      DTS:DTSID="{B38EFCA2-FAFC-4875-8960-41F7BE620F41}"
+      DTS:ObjectName="Abako 1">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:FileUsageType="2"
+          DTS:ConnectionString="C:\SQL_\FTP\Abako" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[FTP Abako]"
+      DTS:CreationName="FTP"
+      DTS:DTSID="{5CF3370B-B8CB-442C-870F-C749E233D810}"
+      DTS:ObjectName="FTP Abako">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="181.143.94.74:21">
+          <DTS:FtpConnection
+            DTS:ServerName="181.143.94.74"
+            DTS:ServerUserName="LukerFTP">
+            <DTS:Property
+              DTS:Name="ServerPassword"
+              Sensitive="1"
+              Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAfEBfL6Z+60iO2tnUvCZ+IwAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAADffhYV+tqd5bi9A7VJ3qdpb+fhV9XMO93GczZUuUrWswAAAAAOgAAAAAIAACAAAABTy62YXST+tcDSv1vmzk9QmVffHhtoet6NngmTTVCqjBAAAAA4vVkIbgXkydglwCwM9RXtQAAAADBne6MxHFJ+2b9ALmhcMJgXP7IzfoljJfa5oZxPH2jLJqnLTzpEJuz0NwY2KxY9QgJ06dz0xnSnWAxjIfifCds</DTS:Property>
+          </DTS:FtpConnection>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[LukerVen_23w]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{E2FD2692-AB60-4B05-8A6D-A22A38EAAF70}"
+      DTS:ObjectName="LukerVen_23w">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=192.168.5.23\B2C;User ID=ASSUser;Initial Catalog=lukerVen;Provider=SQLNCLI11.1;Persist Security Info=True;Auto Translate=False;Application Name=SSIS-Package1-{B8F3234A-F7D6-42AF-B788-027A8DF2149F}SVIDBLUKMZ03.lukerFin;">
+          <DTS:Password
+            DTS:Name="Password"
+            Sensitive="1"
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAfEBfL6Z+60iO2tnUvCZ+IwAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAAB+oPHTQgWkh+T0vfuPVzRPXkUfPxEKFFonCdYVCfFK1wAAAAAOgAAAAAIAACAAAABTI969lNEjmneHZmDFEXkMrNzKkP1sPi8zDg8QPWsdJCAAAACle1I99H3ZQPvzm4zmksyGXv3gg23stVsTE6JJQrfRLUAAAAB3DEKlkGeJmStGJ5iCb5sx5erwVZgDEtPZm/Wksv2RJvHKcBbsZ9bgARU49WMNu+C1jQGfokatnjgB/yr9R9T8</DTS:Password>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Sikon_documentosCSV]"
+      DTS:CreationName="FLATFILE"
+      DTS:DTSID="{0E47769C-A43C-4784-A316-8BA654148F29}"
+      DTS:ObjectName="Sikon_documentosCSV">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:Format="Delimited"
+          DTS:LocaleID="1033"
+          DTS:HeaderRowDelimiter="_x000D__x000A_"
+          DTS:ColumnNamesInFirstDataRow="True"
+          DTS:RowDelimiter=""
+          DTS:TextQualifier="_x003C_none_x003E_"
+          DTS:CodePage="1252"
+          DTS:ConnectionString="C:\SQL_\FTP\Abako\Histo\Sikon_documentos_20180618085222.CSV">
+          <DTS:FlatFileColumns>
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x007C_"
+              DTS:MaximumWidth="100"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="CodigoERP"
+              DTS:DTSID="{D6BF14EC-D0B5-4777-884A-90BB1984F9FE}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x007C_"
+              DTS:MaximumWidth="100"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="NombreAgente"
+              DTS:DTSID="{334C314D-6EB7-4D22-AA10-244823A91784}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x007C_"
+              DTS:MaximumWidth="100"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="asesor"
+              DTS:DTSID="{9A740341-DC5F-41D2-BF8B-EB0A6573A8B1}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x007C_"
+              DTS:MaximumWidth="100"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="grupo"
+              DTS:DTSID="{941FD8E3-A79F-4CE5-AE35-62E4026578A8}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x007C_"
+              DTS:MaximumWidth="100"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="idcliente"
+              DTS:DTSID="{885576B4-D008-447C-B6F0-E7D7DE0E99BA}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x007C_"
+              DTS:MaximumWidth="100"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="razonsocial"
+              DTS:DTSID="{44EC4D26-56F8-4911-8180-B57889A34271}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x007C_"
+              DTS:MaximumWidth="100"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="zona"
+              DTS:DTSID="{3A9B8E73-E3B9-4F30-B1F5-AAB247F31BB5}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x007C_"
+              DTS:MaximumWidth="100"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="canal"
+              DTS:DTSID="{BBA4B6D6-B032-42EF-8E99-805B251790AC}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x007C_"
+              DTS:MaximumWidth="100"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="segmento"
+              DTS:DTSID="{8DFACDDA-1F67-4AEC-89D7-1CB6EA659CDE}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x007C_"
+              DTS:MaximumWidth="100"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="feccreacion"
+              DTS:DTSID="{2CCC5884-EAD9-4BF7-9FAA-5FAD543A2841}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x007C_"
+              DTS:MaximumWidth="100"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="contacto"
+              DTS:DTSID="{AFF20962-559C-419D-8085-E332448A8DC5}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x007C_"
+              DTS:MaximumWidth="100"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="telefono"
+              DTS:DTSID="{6F92D2CC-6F5C-42A9-8B36-3D9836A28D8A}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x007C_"
+              DTS:MaximumWidth="100"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="direccion"
+              DTS:DTSID="{D79D8F8B-E427-44EC-B8FB-08B0BA9A9053}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x007C_"
+              DTS:MaximumWidth="100"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="barrio"
+              DTS:DTSID="{1C5A2AAD-9022-486F-A15A-B9C5E2755EE8}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x007C_"
+              DTS:MaximumWidth="100"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="ciudad"
+              DTS:DTSID="{CCD2BCF7-D3C9-438A-82DD-682919616F5F}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x007C_"
+              DTS:MaximumWidth="100"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="departamento"
+              DTS:DTSID="{27BBAEA0-174A-4846-842A-CD431478A6F1}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x007C_"
+              DTS:MaximumWidth="100"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="longitud"
+              DTS:DTSID="{F204E631-5AEA-4564-BCF6-D8961F819B92}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x007C_"
+              DTS:MaximumWidth="100"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="latitud"
+              DTS:DTSID="{EB6D3A0B-44B2-44A1-B1B5-CEF3301B5E30}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x007C_"
+              DTS:MaximumWidth="100"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="codproveedor"
+              DTS:DTSID="{FDCF9D9E-391D-424A-B8DD-BF45E0EF9C47}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x007C_"
+              DTS:MaximumWidth="100"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="codigo"
+              DTS:DTSID="{1ACF3216-C354-4D49-BE0A-01DAF5229587}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x007C_"
+              DTS:MaximumWidth="100"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="fecha"
+              DTS:DTSID="{07762DA3-ABBA-4531-AC07-AE3A86279EB5}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x007C_"
+              DTS:MaximumWidth="100"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="documento"
+              DTS:DTSID="{8E65E65F-D6C7-4684-BDD6-44D9F5804441}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x007C_"
+              DTS:MaximumWidth="100"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Estado"
+              DTS:DTSID="{2793AD76-9881-4401-B0B8-FB8D2A6D59F8}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x007C_"
+              DTS:MaximumWidth="100"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="TipoTransaccion"
+              DTS:DTSID="{2D72355D-EDDE-4E4A-8F2B-EE4110D02AE9}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x007C_"
+              DTS:MaximumWidth="100"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="documentofuente"
+              DTS:DTSID="{DD20F254-A7D3-40FE-8DC4-BECAE87B2DB0}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x007C_"
+              DTS:MaximumWidth="100"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="formapago"
+              DTS:DTSID="{8DC23122-6071-4F8B-9A3B-893CEDD2A897}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x007C_"
+              DTS:DataType="131"
+              DTS:DataPrecision="15"
+              DTS:DataScale="2"
+              DTS:TextQualified="True"
+              DTS:ObjectName="unidades"
+              DTS:DTSID="{34EEA944-72F7-4CE8-8E49-811E834BED25}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x007C_"
+              DTS:DataType="131"
+              DTS:DataPrecision="15"
+              DTS:DataScale="2"
+              DTS:TextQualified="True"
+              DTS:ObjectName="valor"
+              DTS:DTSID="{ACCA7CF7-E506-4900-B75F-52355CA6DC61}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x000D__x000A_"
+              DTS:DataType="131"
+              DTS:DataPrecision="15"
+              DTS:DataScale="2"
+              DTS:TextQualified="True"
+              DTS:ObjectName="costo"
+              DTS:DTSID="{E4922031-AB62-4FDF-81F2-1E5DB58AA15E}"
+              DTS:CreationName="" />
+          </DTS:FlatFileColumns>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Sikon_inventarioCSV]"
+      DTS:CreationName="FLATFILE"
+      DTS:DTSID="{49C720E6-3BEB-4393-BA03-AD44D0F171EC}"
+      DTS:ObjectName="Sikon_inventarioCSV">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:Format="Delimited"
+          DTS:LocaleID="1033"
+          DTS:HeaderRowDelimiter="_x000D__x000A_"
+          DTS:ColumnNamesInFirstDataRow="True"
+          DTS:RowDelimiter=""
+          DTS:TextQualifier="_x003C_none_x003E_"
+          DTS:CodePage="1252"
+          DTS:ConnectionString="C:\SQL_\FTP\Abako\Sikon_inventario20180507155342.CSV">
+          <DTS:FlatFileColumns>
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x007C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="CodigoERP"
+              DTS:DTSID="{CC062901-22D2-4B7A-AF4F-36A23070B504}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x007C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="NombreAgente"
+              DTS:DTSID="{F1A77A28-0ED7-4C4B-96FD-8D6B581E1B03}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x007C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Fecha"
+              DTS:DTSID="{10EE51CC-DCDD-4ADA-BD50-C6C9719CA9DB}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x007C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Codigo"
+              DTS:DTSID="{3440EBA0-3CDE-405A-B7CD-503C14C98FE0}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x007C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="CodProveedor"
+              DTS:DTSID="{AF60ABD6-A76F-46F3-98B1-98DE89C7D5EC}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x007C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Transito"
+              DTS:DTSID="{F65DB251-AE9D-4D5D-BB13-20D6CABC8C39}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x007C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Disponible"
+              DTS:DTSID="{86DA15A6-2B90-4868-AF46-3FCA403DC6FE}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x007C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Stock"
+              DTS:DTSID="{1E6AD94B-5D51-4434-81E5-98CB63D99B77}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x000D__x000A_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Estado"
+              DTS:DTSID="{87973306-D87D-4D72-AE84-D2DB7194FB5B}"
+              DTS:CreationName="" />
+          </DTS:FlatFileColumns>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Sikon_novedadesCSV]"
+      DTS:CreationName="FLATFILE"
+      DTS:DTSID="{977D3043-C5C6-44C1-9B5F-FFB8DA39CFCB}"
+      DTS:ObjectName="Sikon_novedadesCSV">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:Format="Delimited"
+          DTS:LocaleID="1033"
+          DTS:HeaderRowDelimiter="_x000D__x000A_"
+          DTS:ColumnNamesInFirstDataRow="True"
+          DTS:RowDelimiter=""
+          DTS:TextQualifier="_x003C_none_x003E_"
+          DTS:CodePage="1252"
+          DTS:ConnectionString="C:\SQL_\FTP\Abako\Sikon_novedades20180507155342.CSV">
+          <DTS:FlatFileColumns>
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x007C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="CodigoERP"
+              DTS:DTSID="{DD54CEB0-A5CE-428F-BFE8-712640C92486}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x007C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="NombreAgente"
+              DTS:DTSID="{F9B1B2DF-D7B1-4B9D-81DC-169F05F109C3}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x007C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="IdentificacionAsesor"
+              DTS:DTSID="{22344CE4-DCC9-4318-ABAE-EEC9BDAFBF0C}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x007C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="IdentificacionCliente"
+              DTS:DTSID="{BA31F785-A5B8-45AE-A185-625CCF88232A}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x007C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Novedad"
+              DTS:DTSID="{038CC42A-DDDE-4D0A-AD91-49BD2D937937}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x007C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Tipo"
+              DTS:DTSID="{1B5388AF-5A01-4A25-9A1B-ACC2EF321092}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x000D__x000A_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Fecha"
+              DTS:DTSID="{FC48D9AF-82CC-4E82-9C0E-03B744A5CABF}"
+              DTS:CreationName="" />
+          </DTS:FlatFileColumns>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Sikon_ruteroCSV]"
+      DTS:CreationName="FLATFILE"
+      DTS:DTSID="{0656FDFE-3B07-40FC-AFB2-FD96B0B775CF}"
+      DTS:ObjectName="Sikon_ruteroCSV">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:Format="Delimited"
+          DTS:LocaleID="1033"
+          DTS:HeaderRowDelimiter="_x000D__x000A_"
+          DTS:ColumnNamesInFirstDataRow="True"
+          DTS:RowDelimiter=""
+          DTS:TextQualifier="_x003C_none_x003E_"
+          DTS:CodePage="1252"
+          DTS:ConnectionString="C:\SQL_\FTP\Abako\Sikon_rutero20180507155342.CSV">
+          <DTS:FlatFileColumns>
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x007C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="CodigoERP"
+              DTS:DTSID="{B7841CCF-A838-4FE1-9F71-6C66B40663FB}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x007C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="NombreAgente"
+              DTS:DTSID="{3679A6AF-3949-4857-A344-3198B30F9215}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x007C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Ano"
+              DTS:DTSID="{37497E95-62A2-42BE-870F-DB098757796B}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x007C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Mes"
+              DTS:DTSID="{060AFFCB-38B1-4ADC-9955-E8266F734535}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x007C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="IdentificacionAsesor"
+              DTS:DTSID="{3BC53D61-869D-4C10-A32D-482AC7215D0F}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x007C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="IdentificacionCliente"
+              DTS:DTSID="{F5CCD03E-9A56-42AF-A943-BD74525399E6}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x007C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Dia"
+              DTS:DTSID="{0D7944CE-E761-4118-BBCF-B795156ACF6D}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x000D__x000A_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Orden"
+              DTS:DTSID="{439DE398-0417-4765-B4A4-0A34B1F3169D}"
+              DTS:CreationName="" />
+          </DTS:FlatFileColumns>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Cli"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{3A8016D6-9235-4A3C-8253-7AED609A39FE}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Cli"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; Microsoft SQL Server 2008 R2; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{E2FD2692-AB60-4B05-8A6D-A22A38EAAF70}"
+          SQLTask:SqlStatementSource="USE [lukerVen]&#xA;GO&#xA;delete STGN.[Sikon_EquivalenciaClientes]&#xA;INSERT INTO STGN.[Sikon_EquivalenciaClientes]&#xA;SELECT DISTINCT &#xA;&#x9;  documentos.CodigoERP&#xA;&#x9;, isnull(documentos.ciudad,'')&#xA;&#x9;, case isnull(Clientes.Nombre_Cliente,'Nulo') when 'Nulo' then '0000000000' else documentos.CodigoERP end EquivSAP&#xA;&#x9;, case isnull(Clientes.Nombre_Cliente,'Nulo') when 'Nulo' then NombreAgente else Clientes.Nombre_Cliente end Nombre_Cliente&#xA;&#x9;,'P'&#xA;FROM lukerVen.STGN.documentos documentos&#xA;&#x9; left outer join lukerVen.SD.Clientes Clientes    &#xA;on documentos.CodigoERP = Clientes.Cod_Cliente&#xA;&#xA;insert into lukerVen.ABAKO.Sikon_EquivalenciaClientes&#xA;SELECT Sikon_EquivalenciaClientes.CodigoERP, Sikon_EquivalenciaClientes.ciudad, Sikon_EquivalenciaClientes.EquivSAP, Sikon_EquivalenciaClientes.Nombre_Cliente, Sikon_EquivalenciaClientes.Revisado&#xA;FROM lukerVen.STGN.Sikon_EquivalenciaClientes Sikon_EquivalenciaClientes left outer join&#xA;     lukerVen.ABAKO.Sikon_EquivalenciaClientes Sikon_EquivalenciaClientes_1&#xA;on Sikon_EquivalenciaClientes_1.ciudad = Sikon_EquivalenciaClientes.ciudad AND Sikon_EquivalenciaClientes_1.CodigoERP = Sikon_EquivalenciaClientes.CodigoERP &#xA;WHERE ((Sikon_EquivalenciaClientes_1.CodigoERP='isnull'))&#xA;&#xA;&#xA;&#xA;insert into lukerVen.ABAKO.Sikon_EquivalenciaClientes &#xA;SELECT Sikon_EquivalenciaClientes.CodigoERP, Sikon_EquivalenciaClientes.ciudad, Sikon_EquivalenciaClientes.EquivSAP, Sikon_EquivalenciaClientes.Nombre_Cliente, Sikon_EquivalenciaClientes.Revisado&#xA;FROM lukerVen.STGN.Sikon_EquivalenciaClientes Sikon_EquivalenciaClientes&#xA;where Sikon_EquivalenciaClientes.CodigoERP+ Sikon_EquivalenciaClientes.ciudad not in (&#xA;SELECT Sikon_EquivalenciaClientes.CodigoERP+ Sikon_EquivalenciaClientes.ciudad&#xA;FROM lukerVen.ABAKO.Sikon_EquivalenciaClientes Sikon_EquivalenciaClientes&#xA;&#xA;&#xA;)" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\CSV"
+      DTS:CreationName="Microsoft.ExecuteProcess"
+      DTS:Description="Execute Process Task"
+      DTS:DTSID="{705D8B52-8005-4AF1-8016-797EF89AF6E1}"
+      DTS:ExecutableType="Microsoft.ExecuteProcess"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="CSV"
+      DTS:TaskContact="Execute Process Task;Microsoft Corporation; Microsoft SQL Server 2008 R2; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <ExecuteProcessData
+          Executable="C:\Program Files\Python37\python.exe"
+          Arguments="D:\dbSpaces\MSSQL10.VENNAL\PRJ\Abako\Py\fuenteabako.py"
+          WorkingDirectory="D:\dbSpaces\MSSQL10.VENNAL\PRJ\Abako\Py" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Doc"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{733051AC-6D47-4677-9A89-19687B7F9500}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Doc"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; Microsoft SQL Server 2008 R2; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="3">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{E2FD2692-AB60-4B05-8A6D-A22A38EAAF70}"
+          SQLTask:SqlStatementSource="DECLARE @x_ano  nvarchar(7), @x_versionPto nvarchar(20),@x_mes  int, @x_versionPry nvarchar(20), @x_versionPr1 nvarchar(20) ,@x_texMes  varchar(12)&#xA;DECLARE @sqlCommand varchar(3300), @x_patron nvarchar(7),@x_space  nvarchar(7) ,@x_kG  nvarchar(7), @x_lin0   nvarchar(7),@x_comita  nvarchar(3)&#xA;DECLARE  @x_colVenta varchar(20), @x_colKilo varchar(20), @x_idGrpCli char(2), @x_idAge char(2),@x_Ce varchar(120)&#xA;declare @cicloAct as int, @cicloAnt as int&#xA;&#xA;select  @x_space=''''''&#xA;select @x_comita=''''&#xA;select @x_Ce= (&#xA;SELECT REPLACE ( Max(Sikon_CSV.Csv) , '\' , '/' ) AS 'Csv'&#xA;FROM lukerVen.ABAKO.Sikon_CSV Sikon_CSV&#xA;WHERE (Sikon_CSV.Csv Like '%Sikon_document%.CSV')&#xA;)&#xA;delete lukerVen.STGN.documentos&#xA;select  @sqlCommand = '&#xA;insert into lukerVen.STGN.documentos&#xA;SELECT &#xA;&#x9; right( '+@x_comita+'0000000000'+@x_comita+'+(ltrim(rtrim(CodigoERP))),10)&#x9;&#x9;CodigoERP&#xA;,&#x9; isnull( (ltrim(rtrim(NombreAgente))),'+@x_comita+''+@x_comita+')&#x9;&#x9;NombreAgente&#xA;,&#x9; isnull( (ltrim(rtrim(asesor))),'+@x_comita+''+@x_comita+')&#x9;&#x9;asesor&#xA;,&#x9; isnull( (ltrim(rtrim(grupo))),'+@x_comita+''+@x_comita+')&#x9;&#x9;grupo&#xA;,&#x9; isnull( (ltrim(rtrim(idcliente))),'+@x_comita+''+@x_comita+')&#x9;&#x9;idcliente&#xA;,&#x9; isnull( (ltrim(rtrim(razonsocial))),'+@x_comita+''+@x_comita+')&#x9;&#x9;razonsocial&#xA;,&#x9; isnull( (ltrim(rtrim(zona))),'+@x_comita+''+@x_comita+')&#x9;&#x9;zona&#xA;,&#x9; isnull( (ltrim(rtrim(canal))),'+@x_comita+''+@x_comita+')&#x9;&#x9;canal&#xA;,&#x9; isnull( (ltrim(rtrim(segmento))),'+@x_comita+''+@x_comita+')&#x9;&#x9;segmento&#xA;,&#x9; isnull( (ltrim(rtrim(feccreacion))),'+@x_comita+''+@x_comita+')&#x9;&#x9;feccreacion&#xA;,&#x9; isnull( (ltrim(rtrim(contacto))),'+@x_comita+''+@x_comita+')&#x9;&#x9;contacto&#xA;,&#x9; isnull( (ltrim(rtrim(telefono))),'+@x_comita+''+@x_comita+')&#x9;&#x9;telefono&#xA;,&#x9; isnull( (ltrim(rtrim(direccion))),'+@x_comita+''+@x_comita+')&#x9;&#x9;direccion&#xA;,&#x9; isnull( (ltrim(rtrim(barrio))),'+@x_comita+''+@x_comita+')&#x9;&#x9;barrio&#xA;,&#x9; isnull( (ltrim(rtrim(ciudad))),'+@x_comita+''+@x_comita+')&#x9;&#x9;ciudad&#xA;,&#x9; isnull( (ltrim(rtrim(departamento))),'+@x_comita+''+@x_comita+')&#x9;&#x9;departamento&#xA;,&#x9; isnull( (ltrim(rtrim(longitud))),0)&#x9;&#x9;longitud&#xA;,&#x9; isnull( (ltrim(rtrim(latitud))),0)&#x9;&#x9;latitud&#xA;,&#x9; ( (ltrim(rtrim(codproveedor))))&#x9;&#x9;codproveedor&#xA;,&#x9; ( (ltrim(rtrim(codigo))))&#x9;&#x9;codigo&#xA;,&#x9; ( (ltrim(rtrim(fecha))))&#x9;&#x9;fecha&#xA;,&#x9; ( (ltrim(rtrim(documento))))&#x9;&#x9;documento&#xA;,&#x9; ( (ltrim(rtrim(Estado))))&#x9;&#x9;Estado&#xA;,&#x9; ( (ltrim(rtrim(TipoTransaccion))))&#x9;&#x9;TipoTransaccion&#xA;,&#x9; ( (ltrim(rtrim(documentofuente))))&#x9;&#x9;documentofuente&#xA;,&#x9; ( (ltrim(rtrim(formapago))))&#x9;&#x9;formapago&#xA;,&#x9; ( (ltrim(rtrim(unidades))))&#x9;&#x9;unidades&#xA;,&#x9; ( (ltrim(rtrim(valor))))&#x9;&#x9;valor&#xA;,&#x9; ( (ltrim(rtrim(costo))))&#x9;&#x9;costo&#xA;FROM OPENROWSET(&#xA;   BULK '+@x_comita+@x_Ce+@x_comita+',   &#xA;   FORMATFILE = '+@x_comita+'H:\dbSpaces\MSSQL10.VENNAL\PRJ\Abako\Fmt\Sikon_doc.fmt'+@x_comita+', &#xA;    FIRSTROW=2&#xA;    ) AS DATA;&#xA;&#xA;&#xA;&#x9;&#x9;'&#xA;&#xA;&#x9;&#x9;Exec (@sqlCommand)" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Inv"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{EB666D41-F1E2-4E14-95AB-9739B6CF4E4E}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Inv"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; Microsoft SQL Server 2008 R2; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{E2FD2692-AB60-4B05-8A6D-A22A38EAAF70}"
+          SQLTask:SqlStatementSource="DECLARE @x_ano  nvarchar(7), @x_versionPto nvarchar(20),@x_mes  int, @x_versionPry nvarchar(20), @x_versionPr1 nvarchar(20) ,@x_texMes  varchar(12)&#xA;DECLARE @sqlCommand varchar(3300), @x_patron nvarchar(7),@x_space  nvarchar(7) ,@x_kG  nvarchar(7), @x_lin0   nvarchar(7),@x_comita  nvarchar(3)&#xA;DECLARE  @x_colVenta varchar(20), @x_colKilo varchar(20), @x_idGrpCli char(2), @x_idAge char(2),@x_Ce varchar(120)&#xA;declare @cicloAct as int, @cicloAnt as int&#xA;&#xA;select  @x_space=''''''&#xA;select @x_comita=''''&#xA;select @x_Ce= (&#xA;SELECT REPLACE ( Max(Sikon_CSV.Csv) , '\' , '/' ) AS 'Csv'&#xA;FROM lukerVen.ABAKO.Sikon_CSV Sikon_CSV&#xA;WHERE (Sikon_CSV.Csv Like '%Sikon_inventario%.CSV')&#xA;)&#xA;delete lukerVen.STGN.[inventario]&#xA;select  @sqlCommand = '&#xA;insert into lukerVen.STGN.[inventario]&#xA;SELECT &#xA;&#x9; right( '+@x_comita+'0000000000'+@x_comita+'+(ltrim(rtrim(CodigoERP))),10)&#x9;&#x9;CodigoERP&#xA;,&#x9; ( (ltrim(rtrim(NombreAgente))))&#x9;NombreAgente&#xA;,&#x9; ( (ltrim(rtrim(fecha))))&#x9;&#x9;&#x9;fecha&#xA;,&#x9; ( (ltrim(rtrim(codigo))))&#x9;codigo&#xA;,&#x9; ( (ltrim(rtrim(codproveedor))))&#x9;codproveedor&#xA;,&#x9; ( (ltrim(rtrim(Descripcion))))&#x9;codproveedor&#xA;,&#x9; ( (ltrim(rtrim(Transito))))&#x9;&#x9;Transito&#xA;,&#x9; ( (ltrim(rtrim(Disponible))))&#x9;&#x9;Disponible&#xA;,&#x9; ( (ltrim(rtrim(Stock))))&#x9;&#x9;&#x9;Stock&#xA;,&#x9; ( (ltrim(rtrim(Estado))))&#x9;&#x9;&#x9;Estado&#xA;FROM OPENROWSET(&#xA;   BULK '+@x_comita+@x_Ce+@x_comita+',   &#xA;   FORMATFILE = '+@x_comita+'H:\dbSpaces\MSSQL10.VENNAL\PRJ\Abako\Fmt\Sikon_inv.fmt'+@x_comita+', &#xA;    FIRSTROW=2&#xA;    ) AS DATA;&#xA;&#xA;&#xA;&#x9;&#x9;'&#xA;&#xA;&#x9;&#x9;exec (@sqlCommand)" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Nov"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{2E2F352A-E8F2-46E5-8EC0-C08A38AA5830}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Nov"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; Microsoft SQL Server 2008 R2; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="2">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{E2FD2692-AB60-4B05-8A6D-A22A38EAAF70}"
+          SQLTask:SqlStatementSource="DECLARE @x_ano  nvarchar(7), @x_versionPto nvarchar(20),@x_mes  int, @x_versionPry nvarchar(20), @x_versionPr1 nvarchar(20) ,@x_texMes  varchar(12)&#xA;DECLARE @sqlCommand varchar(3300), @x_patron nvarchar(7),@x_space  nvarchar(7) ,@x_kG  nvarchar(7), @x_lin0   nvarchar(7),@x_comita  nvarchar(3)&#xA;DECLARE  @x_colVenta varchar(20), @x_colKilo varchar(20), @x_idGrpCli char(2), @x_idAge char(2),@x_Ce varchar(120)&#xA;declare @cicloAct as int, @cicloAnt as int&#xA;&#xA;select  @x_space=''''''&#xA;select @x_comita=''''&#xA;select @x_Ce= (&#xA;SELECT REPLACE ( Max(Sikon_CSV.Csv) , '\' , '/' ) AS 'Csv'&#xA;FROM lukerVen.ABAKO.Sikon_CSV Sikon_CSV&#xA;WHERE (Sikon_CSV.Csv Like '%Sikon_novedades%.CSV')&#xA;)&#xA;delete lukerVen.STGN.[novedades]&#xA;select  @sqlCommand = '&#xA;insert into lukerVen.STGN.[novedades]&#xA;SELECT &#xA;&#x9; right( '+@x_comita+'0000000000'+@x_comita+'+(ltrim(rtrim(CodigoERP))),10)&#x9;&#x9;CodigoERP&#xA;,&#x9; ( (ltrim(rtrim(NombreAgente))))&#x9;NombreAgente&#xA;,&#x9; ( (ltrim(rtrim(IdentificacionAsesor))))&#x9;&#x9;&#x9;IdentificacionAsesor&#xA;,&#x9; ( (ltrim(rtrim(IdentificacionCliente))))&#x9;IdentificacionCliente&#xA;,&#x9; ( (ltrim(rtrim(Novedad))))&#x9;Novedad&#xA;,&#x9; ( (ltrim(rtrim(Tipo))))&#x9;Tipo&#xA;,&#x9; ( (ltrim(rtrim(Fecha))))&#x9;Fecha&#xA;FROM OPENROWSET(&#xA;   BULK '+@x_comita+@x_Ce+@x_comita+',   &#xA;   FORMATFILE = '+@x_comita+'H:\dbSpaces\MSSQL10.VENNAL\PRJ\Abako\Fmt\Sikon_nov.fmt'+@x_comita+', &#xA;    FIRSTROW=2&#xA;    ) AS DATA;&#xA;&#xA;&#xA;&#x9;&#x9;'&#xA;&#xA;&#x9;&#x9;exec (@sqlCommand)" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Prod"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{06E369AE-5C8C-4936-96A2-C60E539A6D7C}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Prod"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; Microsoft SQL Server 2008 R2; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{E2FD2692-AB60-4B05-8A6D-A22A38EAAF70}"
+          SQLTask:SqlStatementSource="USE [lukerVen]&#xA;GO&#xA;delete STGN.[Sikon_EquivalenciaProductos]&#xA;&#xA;INSERT INTO STGN.[Sikon_EquivalenciaProductos]&#xA;SELECT DISTINCT documentos.codigo, documentos.codproveedor&#xA;, isnull(Productos.Cod_SKU,'000000000000000000')&#xA;, 'P', '',''&#xA;FROM lukerVen.STGN.documentos documentos left outer join lukerVen.SD.Productos Productos&#xA;on right('0000000000000000000'+left(ltrim(rtrim(codproveedor)),7),18) = Productos.Cod_SKU&#xA;&#xA;update Sikon_EquivalenciaProductos set&#xA; Sikon_EquivalenciaProductos.Cod_SKU=Productos.Cod_SKU &#xA;FROM lukerVen.STGN.Sikon_EquivalenciaProductos Sikon_EquivalenciaProductos&#xA;   left outer join lukerVen.SD.Productos Productos &#xA;on right('0000000000000000000'+right(ltrim(rtrim(codproveedor)),7),18) = Productos.Cod_SKU &#xA;WHERE ((Sikon_EquivalenciaProductos.Cod_SKU='000000000000000000'))&#xA;and Productos.Cod_SKU is not null&#xA;&#xA;update Sikon_EquivalenciaProductos set&#xA; Sikon_EquivalenciaProductos.Cod_SKU=Productos.Cod_SKU &#xA;FROM lukerVen.STGN.Sikon_EquivalenciaProductos Sikon_EquivalenciaProductos&#xA;   left outer join lukerVen.SD.Productos Productos &#xA;on right('0000000000000000000'+left(ltrim(rtrim(codigo)),7),18) = Productos.Cod_SKU &#xA;WHERE ((Sikon_EquivalenciaProductos.Cod_SKU='000000000000000000'))&#xA;and Productos.Cod_SKU is not null&#xA;&#xA;update Sikon_EquivalenciaProductos set&#xA; Sikon_EquivalenciaProductos.Cod_SKU=Productos.Cod_SKU &#xA;FROM lukerVen.STGN.Sikon_EquivalenciaProductos Sikon_EquivalenciaProductos&#xA;   left outer join lukerVen.SD.Productos Productos &#xA;on right('0000000000000000000'+right(ltrim(rtrim(codigo)),7),18) = Productos.Cod_SKU &#xA;WHERE ((Sikon_EquivalenciaProductos.Cod_SKU='000000000000000000'))&#xA;and Productos.Cod_SKU is not null&#xA;&#xA;update Sikon_EquivalenciaProductos set&#xA; Sikon_EquivalenciaProductos.NombreAgente= productosAgente.NombreAgente&#xA;FROM lukerVen.STGN.productosAgente productosAgente, lukerVen.STGN.Sikon_EquivalenciaProductos Sikon_EquivalenciaProductos&#xA;WHERE productosAgente.codigo = Sikon_EquivalenciaProductos.codigo &#xA;AND productosAgente.codproveedor = Sikon_EquivalenciaProductos.codproveedor &#xA;AND ((Sikon_EquivalenciaProductos.Cod_SKU='000000000000000000'))&#xA;&#xA;insert into lukerVen.ABAKO.Sikon_EquivalenciaProductos &#xA;SELECT Sikon_EquivalenciaProductos.*&#xA;FROM lukerVen.STGN.Sikon_EquivalenciaProductos Sikon_EquivalenciaProductos left outer join lukerVen.ABAKO.Sikon_EquivalenciaProductos Sikon_EquivalenciaProductos_1&#xA;on Sikon_EquivalenciaProductos_1.codigo = Sikon_EquivalenciaProductos.codigo AND Sikon_EquivalenciaProductos_1.codproveedor = Sikon_EquivalenciaProductos.codproveedor &#xA;where ((Sikon_EquivalenciaProductos_1.codigo Is Null))&#xA;&#xA;update Sikon_EquivalenciaProductos set&#xA; Sikon_EquivalenciaProductos.Descripcion= inventario.Detalle&#xA;FROM lukerVen.STGN.inventario inventario, lukerVen.ABAKO.Sikon_EquivalenciaProductos Sikon_EquivalenciaProductos&#xA;WHERE inventario.codigo = Sikon_EquivalenciaProductos.codigo AND inventario.codproveedor = Sikon_EquivalenciaProductos.codproveedor &#xA;AND ((Sikon_EquivalenciaProductos.Cod_SKU='000000000000000000') AND (inventario.Detalle&lt;&gt;'SIN DESCRIPCION') &#xA;AND (Sikon_EquivalenciaProductos.Descripcion&lt;&gt;inventario.Detalle))&#xA;&#xA;&#xA;insert into lukerVen.ABAKO.Sikon_EquivalenciaProductos&#xA;SELECT inventario.codigo, inventario.codproveedor &#xA;,'000000000000000000'&#xA;,'P'&#xA;, Max(inventario.NombreAgente) AS 'Max of NombreAgente', Max(inventario.Detalle) AS 'Max of Detalle'&#xA;FROM lukerVen.STGN.inventario inventario&#xA;where inventario.codigo+ inventario.codproveedor not in (&#xA;SELECT Sikon_EquivalenciaProductos.codigo+ Sikon_EquivalenciaProductos.codproveedor&#xA;FROM lukerVen.ABAKO.Sikon_EquivalenciaProductos Sikon_EquivalenciaProductos&#xA;&#xA;)&#xA;group by  inventario.codigo, inventario.codproveedor&#xA;&#xA;update Sikon_EquivalenciaProductos set&#xA;Sikon_EquivalenciaProductos.Descripcion= ProductosInv.Descripcion&#xA;FROM lukerVen.STGN.ProductosInv ProductosInv, lukerVen.ABAKO.Sikon_EquivalenciaProductos Sikon_EquivalenciaProductos&#xA;WHERE ProductosInv.codigo = Sikon_EquivalenciaProductos.codigo &#xA;AND ProductosInv.codproveedor = Sikon_EquivalenciaProductos.codproveedor &#xA;AND ((Sikon_EquivalenciaProductos.Descripcion='???'))&#xA;&#xA;update Sikon_EquivalenciaProductos set Sikon_EquivalenciaProductos.Cod_SKU= Sikon_EquivalenciaProductos_1.Cod_SKU&#xA;FROM lukerVen.ABAKO.Sikon_EquivalenciaProductos Sikon_EquivalenciaProductos, lukerVen.STGN.Sikon_EquivalenciaProductos Sikon_EquivalenciaProductos_1&#xA;WHERE Sikon_EquivalenciaProductos_1.codigo = Sikon_EquivalenciaProductos.codigo &#xA;AND Sikon_EquivalenciaProductos_1.codproveedor = Sikon_EquivalenciaProductos.codproveedor &#xA;AND ((Sikon_EquivalenciaProductos.Cod_SKU='000000000000000000') &#xA;AND (Sikon_EquivalenciaProductos_1.Cod_SKU&lt;&gt;'000000000000000000'))" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\rut"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{92AB2771-9094-4AAF-A02E-843D14F90707}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="rut"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; Microsoft SQL Server 2008 R2; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{E2FD2692-AB60-4B05-8A6D-A22A38EAAF70}"
+          SQLTask:SqlStatementSource="DECLARE @x_ano  nvarchar(7), @x_versionPto nvarchar(20),@x_mes  int, @x_versionPry nvarchar(20), @x_versionPr1 nvarchar(20) ,@x_texMes  varchar(12)&#xA;DECLARE @sqlCommand varchar(3300), @x_patron nvarchar(7),@x_space  nvarchar(7) ,@x_kG  nvarchar(7), @x_lin0   nvarchar(7),@x_comita  nvarchar(3)&#xA;DECLARE  @x_colVenta varchar(20), @x_colKilo varchar(20), @x_idGrpCli char(2), @x_idAge char(2),@x_Ce varchar(120)&#xA;declare @cicloAct as int, @cicloAnt as int&#xA;&#xA;select  @x_space=''''''&#xA;select @x_comita=''''&#xA;select @x_Ce= (&#xA;SELECT REPLACE ( Max(Sikon_CSV.Csv) , '\' , '/' ) AS 'Csv'&#xA;FROM lukerVen.ABAKO.Sikon_CSV Sikon_CSV&#xA;WHERE (Sikon_CSV.Csv Like '%Sikon_rutero%.CSV')&#xA;)&#xA;delete lukerVen.STGN.[rutero]&#xA;select  @sqlCommand = '&#xA;insert into lukerVen.STGN.[rutero]&#xA;SELECT &#xA;&#x9; right( '+@x_comita+'0000000000'+@x_comita+'+(ltrim(rtrim(CodigoERP))),10)&#x9;&#x9;CodigoERP&#xA;,&#x9; ( (ltrim(rtrim(NombreAgente))))&#x9;NombreAgente&#xA;,&#x9; ( (ltrim(rtrim(Ano))))&#x9;Ano&#xA;,&#x9; ( (ltrim(rtrim(Mes))))&#x9;Mes&#xA;,&#x9; ( (ltrim(rtrim(IdentificacionAsesor))))&#x9;&#x9;&#x9;IdentificacionAsesor&#xA;,&#x9; ( (ltrim(rtrim(IdentificacionCliente))))&#x9;IdentificacionCliente&#xA;,&#x9; ( (ltrim(rtrim(Dia))))&#x9;Dia&#xA;,&#x9; ( (ltrim(rtrim(Orden))))&#x9;Orden&#xA;&#xA;FROM OPENROWSET(&#xA;   BULK '+@x_comita+@x_Ce+@x_comita+',   &#xA;   FORMATFILE = '+@x_comita+'H:\dbSpaces\MSSQL10.VENNAL\PRJ\Abako\Fmt\Sikon_rut.fmt'+@x_comita+', &#xA;    FIRSTROW=2&#xA;    ) AS DATA;&#xA;&#xA;&#xA;&#x9;&#x9;'&#xA;&#xA;&#x9;&#x9;exec (@sqlCommand)" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\up doc"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{BA3811D6-19B8-4736-8A37-5F2DA5AE3DF0}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="up doc"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; Microsoft SQL Server 2008 R2; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{E2FD2692-AB60-4B05-8A6D-A22A38EAAF70}"
+          SQLTask:SqlStatementSource="delete Sikon_documentos&#xA;FROM lukerVen.ABAKO.Sikon_documentos Sikon_documentos&#xA;, STGN.corteDocs&#xA;where year(fecha)=ano&#xA;and month(fecha)=mes&#xA;&#xA;insert into lukerVen.ABAKO.Sikon_documentos&#xA;select * from [STGN].[documentos]&#xA;&#xA;&#xA;delete Sikon_inventario&#xA;FROM lukerVen.STGN.corteInv corteInv, lukerVen.ABAKO.Sikon_inventario Sikon_inventario&#xA;WHERE (year(Sikon_inventario.fecha)=corteInv.ano) &#xA;AND (month(Sikon_inventario.fecha)=corteInv.mes)&#xA;&#xA;insert into lukerVen.ABAKO.Sikon_inventario&#xA;SELECT inventario.CodigoERP, inventario.NombreAgente, inventario.fecha, inventario.codigo, inventario.codproveedor, inventario.Transito, inventario.Disponible, inventario.Stock, inventario.Estado&#xA;FROM lukerVen.STGN.inventario inventario&#xA;&#xA;delete Sikon_novedades&#xA;FROM lukerVen.STGN.corteNov corteNov, lukerVen.ABAKO.Sikon_novedades Sikon_novedades&#xA;WHERE (year(fecha)=corteNov.ano) AND (month(fecha)=corteNov.mes)&#xA;&#xA;insert into lukerVen.ABAKO.Sikon_novedades&#xA;select * from lukerVen.STGN.novedades&#xA;&#xA;&#xA;&#xA;delete Sikon_rutero&#xA;FROM lukerVen.STGN.corteRut corteRut, lukerVen.ABAKO.Sikon_rutero Sikon_rutero&#xA;WHERE Sikon_rutero.Ano = corteRut.Ano AND Sikon_rutero.Mes = corteRut.Mes&#xA;&#xA;insert into lukerVen.ABAKO.Sikon_rutero&#xA;select * from lukerVen.STGN.rutero&#xA;&#xA;delete Sikon_documentos&#xA;FROM lukerVen.ABAKO.Sikon_documentos Sikon_documentos&#xA;WHERE (Year(fecha)&gt;3000)" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{DCE011E5-1399-4DFF-9819-BCA61D488BA9}"
+      DTS:From="Package\CSV"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Doc" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{7EE3F72B-9B26-4641-961D-975D4436FC32}"
+      DTS:From="Package\CSV"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Inv" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{188372BE-4EEB-4A7B-8793-C3C788DE9F88}"
+      DTS:From="Package\CSV"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
+      DTS:To="Package\Nov" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 3]"
+      DTS:CreationName=""
+      DTS:DTSID="{9D6D0052-2528-440F-8E56-D05C1690B6EB}"
+      DTS:From="Package\CSV"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 3"
+      DTS:To="Package\rut" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 4]"
+      DTS:CreationName=""
+      DTS:DTSID="{DF4E5E44-1D10-4E63-914C-56753EEA334A}"
+      DTS:From="Package\Doc"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 4"
+      DTS:To="Package\Prod" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 5]"
+      DTS:CreationName=""
+      DTS:DTSID="{D28BF685-30D5-49B7-80E9-22354FCD2C2E}"
+      DTS:From="Package\Inv"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 5"
+      DTS:To="Package\Prod" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 6]"
+      DTS:CreationName=""
+      DTS:DTSID="{4E7146E9-36F4-460C-AA11-D390B00C1A9E}"
+      DTS:From="Package\Nov"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 6"
+      DTS:To="Package\Prod" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 7]"
+      DTS:CreationName=""
+      DTS:DTSID="{54E7F0F9-3CD6-4A15-9A1E-AB74D4314821}"
+      DTS:From="Package\rut"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 7"
+      DTS:To="Package\Prod" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 8]"
+      DTS:CreationName=""
+      DTS:DTSID="{F641448D-52D6-4053-B632-084BA8CC1D40}"
+      DTS:From="Package\Prod"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 8"
+      DTS:To="Package\Cli" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 9]"
+      DTS:CreationName=""
+      DTS:DTSID="{444F0798-E007-42F5-AAD8-4E58ADB6CBFA}"
+      DTS:From="Package\Cli"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 9"
+      DTS:To="Package\up doc" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--Esta sección CDATA contiene la información de diseño del paquete. Esta sección incluye información como, por ejemplo, las coordenadas (x,y), el ancho y el alto.-->
+<!--Si edita manualmente esta sección y comete un error, puede eliminarlo. -->
+<!--El paquete podrá cargarse normalmente, pero se perderá la información de diseño anterior y el diseñador reorganizará los elementos automáticamente en la superficie de diseño.-->
+<Objects
+  Version="8">
+  <!--Cada uno de los nodos siguientes contiene propiedades que no afectan al comportamiento en tiempo de ejecución.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="136,44"
+          Id="Package\Cli"
+          TopLeft="237.462264150943,250.481132075472" />
+        <NodeLayout
+          Size="136,44"
+          Id="Package\CSV"
+          TopLeft="237.462264150943,5.5" />
+        <NodeLayout
+          Size="136,44"
+          Id="Package\Doc"
+          TopLeft="4.92857141884005,86.5486126440285" />
+        <NodeLayout
+          Size="136,44"
+          Id="Package\Inv"
+          TopLeft="160.141509433962,87.1603773584906" />
+        <NodeLayout
+          Size="136,44"
+          Id="Package\Nov"
+          TopLeft="314.783018867925,87.1603773584906" />
+        <NodeLayout
+          Size="136,44"
+          Id="Package\Prod"
+          TopLeft="237.462264150943,168.820754716981" />
+        <NodeLayout
+          Size="136,44"
+          Id="Package\rut"
+          TopLeft="469.424528301887,87.1603773584906" />
+        <NodeLayout
+          Size="136,44"
+          Id="Package\up doc"
+          TopLeft="237.462264150943,332.141509433962" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="267.062264150943,49.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-194.133692732103,37.0486126440285"
+              Start="0,0"
+              End="-194.133692732103,29.5486126440285">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,7.23605465433651" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,7.23605465433651"
+                    Point2="0,11.2360546543365"
+                    Point3="-4,11.2360546543365" />
+                  <mssgle:LineSegment
+                    End="-190.133692732103,11.2360546543365" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-190.133692732103,11.2360546543365"
+                    Point2="-194.133692732103,11.2360546543365"
+                    Point3="-194.133692732103,15.2360546543365" />
+                  <mssgle:LineSegment
+                    End="-194.133692732103,29.5486126440285" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="284.594339622641,49.4245283018868">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-56.5660377358491,37.7358490566038"
+              Start="0,0"
+              End="-56.5660377358491,30.2358490566038">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,18.8679245283019" />
+                  <mssgle:LineSegment
+                    End="-56.5660377358491,18.8679245283019" />
+                  <mssgle:LineSegment
+                    End="-56.5660377358491,30.2358490566038" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="326.103773584906,49.4245283018868">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="56.5660377358491,37.7358490566038"
+              Start="0,0"
+              End="56.5660377358491,30.2358490566038">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,18.8679245283019" />
+                  <mssgle:LineSegment
+                    End="56.5660377358491,18.8679245283019" />
+                  <mssgle:LineSegment
+                    End="56.5660377358491,30.2358490566038" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 3]"
+          TopLeft="346.858490566038,49.4245283018868">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="190.452830188679,37.7358490566038"
+              Start="0,0"
+              End="190.452830188679,30.2358490566038">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,12.5660377358491" />
+                  <mssgle:LineSegment
+                    End="190.452830188679,12.5660377358491" />
+                  <mssgle:LineSegment
+                    End="190.452830188679,30.2358490566038" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 4]"
+          TopLeft="72.9285714188401,130.548612644028">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="194.133692732103,38.2721420729525"
+              Start="0,0"
+              End="194.133692732103,30.7721420729525">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,22.6650170180407" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,22.6650170180407"
+                    Point2="0,26.6650170180407"
+                    Point3="4,26.6650170180407" />
+                  <mssgle:LineSegment
+                    End="190.133692732103,26.6650170180407" />
+                  <mssgle:CubicBezierSegment
+                    Point1="190.133692732103,26.6650170180407"
+                    Point2="194.133692732103,26.6650170180407"
+                    Point3="194.133692732103,30.6650170180407" />
+                  <mssgle:LineSegment
+                    End="194.133692732103,30.7721420729525" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 5]"
+          TopLeft="228.028301886792,131.084905660377">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="56.5660377358491,37.7358490566038"
+              Start="0,0"
+              End="56.5660377358491,30.2358490566038">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,18.8679245283019" />
+                  <mssgle:LineSegment
+                    End="56.5660377358491,18.8679245283019" />
+                  <mssgle:LineSegment
+                    End="56.5660377358491,30.2358490566038" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 6]"
+          TopLeft="382.669811320755,131.084905660377">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-56.5660377358491,37.7358490566038"
+              Start="0,0"
+              End="-56.5660377358491,30.2358490566038">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,18.8679245283019" />
+                  <mssgle:LineSegment
+                    End="-56.5660377358491,18.8679245283019" />
+                  <mssgle:LineSegment
+                    End="-56.5660377358491,30.2358490566038" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 7]"
+          TopLeft="537.311320754717,131.084905660377">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-190.452830188679,37.7358490566038"
+              Start="0,0"
+              End="-190.452830188679,30.2358490566038">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,18.8679245283019" />
+                  <mssgle:LineSegment
+                    End="-190.452830188679,18.8679245283019" />
+                  <mssgle:LineSegment
+                    End="-190.452830188679,30.2358490566038" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 8]"
+          TopLeft="305.349056603774,212.745283018868">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,37.7358490566038"
+              Start="0,0"
+              End="0,30.2358490566038">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,30.2358490566038" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 9]"
+          TopLeft="305.349056603774,294.405660377358">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,37.7358490566038"
+              Start="0,0"
+              End="0,30.2358490566038">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,30.2358490566038" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

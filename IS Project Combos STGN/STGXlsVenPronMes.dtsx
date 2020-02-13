@@ -1,0 +1,979 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="6/4/2019 4:32:38 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="LAPTOP-MFGK5CPU"
+  DTS:CreatorName="LAPTOP-MFGK5CPU\fvalb"
+  DTS:DTSID="{6BCD59B6-9970-485F-9162-6919198834DD}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="15.0.1300.371"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="STGXlsVenPronMes"
+  DTS:PackageType="5"
+  DTS:VersionBuild="19"
+  DTS:VersionGUID="{294E20E7-E4F6-4285-9F61-3F2BF0A2A5AD}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[LukerVen_23w]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{E2FD2692-AB60-4B05-8A6D-A22A38EAAF70}"
+      DTS:ObjectName="LukerVen_23w">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=192.168.5.23\B2C;User ID=ASSUser;Initial Catalog=lukerVen;Provider=SQLNCLI11.1;Persist Security Info=True;Auto Translate=False;Application Name=SSIS-Package1-{B8F3234A-F7D6-42AF-B788-027A8DF2149F}SVIDBLUKMZ03.lukerFin;">
+          <DTS:Password
+            DTS:Name="Password"
+            Sensitive="1"
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAuR1Gdsnx50KES8/66vqaKwAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAADFkXJbctczldWaPxuTXN3p6tf6DdczA188n8eEspfH7wAAAAAOgAAAAAIAACAAAABVo+r074UApEFOoIMFhiPPB7VF7lfo1oZetIHIxzoKWSAAAACKZ4zxxIB6qNo2ZmansboEaLtYC6EaVRL/2hQTo9UCR0AAAACqB+csfKGGea0cypUjdiJ3z+QRMDj6YJsbA3XtfcDiRIqvDavh9R/fjConEV/nZ1xMufffDAYbKpyITK1dly19</DTS:Password>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Base Estadistica"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Tarea Flujo de datos"
+      DTS:DTSID="{EB55E155-366A-4485-B39F-B7932EB41ED6}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Base Estadistica"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Base Estadistica\Origen de OLE DB"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="Origen de OLE DB;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;7"
+              description="Origen de OLE DB"
+              name="Origen de OLE DB"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="Número de segundos antes de que se agote el tiempo de espera de un comando. Un valor de 0 indica un tiempo de espera infinito."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica el nombre del objeto de base de datos usado para abrir un conjunto de filas."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Especifica la variable que contiene el nombre del objeto de base de datos usado para abrir un conjunto de filas."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="Comando SQL para ejecutar."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT PVOFMesParametros.Periodo
+, Facturas.Cod_Cliente
+, Facturas.JerarquiaProducto
+, Facturas.Cod_SKU
+, Facturas.FechaPedido
+, sum(Facturas.Kilos) as Kilos
+, ROW_NUMBER() OVER (PARTITION BY  PVOFMesParametros.Periodo
+, Facturas.Cod_Cliente
+, Facturas.JerarquiaProducto
+, Facturas.Cod_SKU ORDER BY  JerarquiaProducto,FechaPedido) AS PedidoNum  
+FROM lukerVen.SD.[FacturasW] Facturas
+, lukerVen.PRON.PVOFMesParametros PVOFMesParametros
+, lukerVen.SD.TipoDocumento TipoDocumento
+WHERE TipoDocumento.Cod_TipoFactura = Facturas.Cod_TipoFactura 
+AND ( (PVOFMesParametros.EstadoPronostico='ACT')
+AND (Facturas.FechaFactura&gt;=PVOFMesParametros.PeriodoEstI) 
+AND (Facturas.FechaFactura&lt;=PVOFMesParametros.PeriodoEstF) 
+AND (TipoDocumento.NombreTipoDocumento Like 'Factura%') 
+)
+group by 
+PVOFMesParametros.Periodo
+, Facturas.JerarquiaProducto
+, Facturas.Cod_Cliente
+, Facturas.FechaPedido
+, Facturas.Cod_SKU
+having sum(Facturas.Kilos) &lt;&gt;0
+order by 1,2,3,4,5</property>
+                <property
+                  dataType="System.String"
+                  description="Variable que contiene el comando SQL para ejecutar."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica la página de códigos de columna para utilizar cuando la información de página de códigos no está disponible en el origen de datos."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Fuerza el uso del valor de la propiedad DefaultCodePage al describir datos de caracteres."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica el modo utilizado para obtener acceso a la base de datos."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="Asignaciones entre los parámetros del comando SQL y las variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Base Estadistica\Origen de OLE DB.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[LukerVen_23w]"
+                  connectionManagerRefId="Package.ConnectionManagers[LukerVen_23w]"
+                  description="La conexión de tiempo de ejecución OLE DB usada para obtener acceso a la base de datos."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Base Estadistica\Origen de OLE DB.Outputs[Salida de origen de OLE DB]"
+                  name="Salida de origen de OLE DB">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Base Estadistica\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[Periodo]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Base Estadistica\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[Periodo]"
+                      length="6"
+                      lineageId="Package\Base Estadistica\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[Periodo]"
+                      name="Periodo"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Base Estadistica\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[Cod_Cliente]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Base Estadistica\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[Cod_Cliente]"
+                      length="10"
+                      lineageId="Package\Base Estadistica\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[Cod_Cliente]"
+                      name="Cod_Cliente"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Base Estadistica\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[JerarquiaProducto]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Base Estadistica\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[JerarquiaProducto]"
+                      length="18"
+                      lineageId="Package\Base Estadistica\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[JerarquiaProducto]"
+                      name="JerarquiaProducto"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Base Estadistica\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[Cod_SKU]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Base Estadistica\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[Cod_SKU]"
+                      length="18"
+                      lineageId="Package\Base Estadistica\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[Cod_SKU]"
+                      name="Cod_SKU"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Base Estadistica\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[FechaPedido]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Base Estadistica\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[FechaPedido]"
+                      length="8"
+                      lineageId="Package\Base Estadistica\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[FechaPedido]"
+                      name="FechaPedido"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Base Estadistica\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[Kilos]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Base Estadistica\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[Kilos]"
+                      lineageId="Package\Base Estadistica\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[Kilos]"
+                      name="Kilos"
+                      precision="38"
+                      scale="3"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Base Estadistica\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[PedidoNum]"
+                      dataType="i8"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Base Estadistica\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[PedidoNum]"
+                      lineageId="Package\Base Estadistica\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[PedidoNum]"
+                      name="PedidoNum"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Base Estadistica\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[Periodo]"
+                      codePage="1252"
+                      dataType="str"
+                      length="6"
+                      name="Periodo" />
+                    <externalMetadataColumn
+                      refId="Package\Base Estadistica\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[Cod_Cliente]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="Cod_Cliente" />
+                    <externalMetadataColumn
+                      refId="Package\Base Estadistica\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[JerarquiaProducto]"
+                      codePage="1252"
+                      dataType="str"
+                      length="18"
+                      name="JerarquiaProducto" />
+                    <externalMetadataColumn
+                      refId="Package\Base Estadistica\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[Cod_SKU]"
+                      codePage="1252"
+                      dataType="str"
+                      length="18"
+                      name="Cod_SKU" />
+                    <externalMetadataColumn
+                      refId="Package\Base Estadistica\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[FechaPedido]"
+                      codePage="1252"
+                      dataType="str"
+                      length="8"
+                      name="FechaPedido" />
+                    <externalMetadataColumn
+                      refId="Package\Base Estadistica\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[Kilos]"
+                      dataType="numeric"
+                      name="Kilos"
+                      precision="38"
+                      scale="3" />
+                    <externalMetadataColumn
+                      refId="Package\Base Estadistica\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[PedidoNum]"
+                      dataType="i8"
+                      name="PedidoNum" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Base Estadistica\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB]"
+                  isErrorOut="true"
+                  name="Salida de error de origen de OLE DB">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Base Estadistica\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[Periodo]"
+                      codePage="1252"
+                      dataType="str"
+                      length="6"
+                      lineageId="Package\Base Estadistica\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[Periodo]"
+                      name="Periodo" />
+                    <outputColumn
+                      refId="Package\Base Estadistica\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[Cod_Cliente]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      lineageId="Package\Base Estadistica\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[Cod_Cliente]"
+                      name="Cod_Cliente" />
+                    <outputColumn
+                      refId="Package\Base Estadistica\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[JerarquiaProducto]"
+                      codePage="1252"
+                      dataType="str"
+                      length="18"
+                      lineageId="Package\Base Estadistica\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[JerarquiaProducto]"
+                      name="JerarquiaProducto" />
+                    <outputColumn
+                      refId="Package\Base Estadistica\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[Cod_SKU]"
+                      codePage="1252"
+                      dataType="str"
+                      length="18"
+                      lineageId="Package\Base Estadistica\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[Cod_SKU]"
+                      name="Cod_SKU" />
+                    <outputColumn
+                      refId="Package\Base Estadistica\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[FechaPedido]"
+                      codePage="1252"
+                      dataType="str"
+                      length="8"
+                      lineageId="Package\Base Estadistica\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[FechaPedido]"
+                      name="FechaPedido" />
+                    <outputColumn
+                      refId="Package\Base Estadistica\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[Kilos]"
+                      dataType="numeric"
+                      lineageId="Package\Base Estadistica\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[Kilos]"
+                      name="Kilos"
+                      precision="38"
+                      scale="3" />
+                    <outputColumn
+                      refId="Package\Base Estadistica\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[PedidoNum]"
+                      dataType="i8"
+                      lineageId="Package\Base Estadistica\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[PedidoNum]"
+                      name="PedidoNum" />
+                    <outputColumn
+                      refId="Package\Base Estadistica\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Base Estadistica\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Base Estadistica\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Base Estadistica\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Base Estadistica\PVOFBaseEstadistica"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="Destino de OLE DB;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;4"
+              description="Destino de OLE DB"
+              name="PVOFBaseEstadistica"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="Número de segundos antes de que se agote el tiempo de espera de un comando. Un valor de 0 indica un tiempo de espera infinito."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica el nombre del objeto de base de datos usado para abrir un conjunto de filas."
+                  name="OpenRowset">[PRON].[PVOFBaseEstadistica]</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica la variable que contiene el nombre del objeto de base de datos usado para abrir un conjunto de filas."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="Comando SQL para ejecutar."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica la página de códigos de columna para utilizar cuando la información de página de códigos no está disponible en el origen de datos."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Fuerza el uso del valor de la propiedad DefaultCodePage al describir datos de caracteres."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica el modo utilizado para obtener acceso a la base de datos."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indica si los valores proporcionados para columnas de identidad se van a copiar al destino. Si es False, los valores de las columnas de identidad se generan automáticamente en el destino. Solo se aplica si está activada la carga rápida."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indica si las columnas que contienen NULL tendrán NULL insertado en el destino. Si es False, las columnas que contienen NULL tendrán sus valores predeterminados insertados en el destino. Solo se aplica si está activada la carga rápida."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica opciones para usar con la carga rápida. Solo se aplica si está activada la carga rápida."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica cuándo se emiten confirmaciones durante la inserción de datos. El valor 0 especifica que se emitirá una confirmación al final de la inserción de datos. Solo se aplica si está activada la carga rápida."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Base Estadistica\PVOFBaseEstadistica.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[LukerVen_23w]"
+                  connectionManagerRefId="Package.ConnectionManagers[LukerVen_23w]"
+                  description="La conexión de tiempo de ejecución OLE DB usada para obtener acceso a la base de datos."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Base Estadistica\PVOFBaseEstadistica.Inputs[Entrada de destino de OLE DB]"
+                  errorOrTruncationOperation="Insertar"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="Entrada de destino de OLE DB">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Base Estadistica\PVOFBaseEstadistica.Inputs[Entrada de destino de OLE DB].Columns[Periodo]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="6"
+                      cachedName="Periodo"
+                      externalMetadataColumnId="Package\Base Estadistica\PVOFBaseEstadistica.Inputs[Entrada de destino de OLE DB].ExternalColumns[Periodo]"
+                      lineageId="Package\Base Estadistica\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[Periodo]" />
+                    <inputColumn
+                      refId="Package\Base Estadistica\PVOFBaseEstadistica.Inputs[Entrada de destino de OLE DB].Columns[Cod_Cliente]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="10"
+                      cachedName="Cod_Cliente"
+                      externalMetadataColumnId="Package\Base Estadistica\PVOFBaseEstadistica.Inputs[Entrada de destino de OLE DB].ExternalColumns[Cod_Cliente]"
+                      lineageId="Package\Base Estadistica\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[Cod_Cliente]" />
+                    <inputColumn
+                      refId="Package\Base Estadistica\PVOFBaseEstadistica.Inputs[Entrada de destino de OLE DB].Columns[JerarquiaProducto]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="18"
+                      cachedName="JerarquiaProducto"
+                      externalMetadataColumnId="Package\Base Estadistica\PVOFBaseEstadistica.Inputs[Entrada de destino de OLE DB].ExternalColumns[JerarquiaProducto]"
+                      lineageId="Package\Base Estadistica\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[JerarquiaProducto]" />
+                    <inputColumn
+                      refId="Package\Base Estadistica\PVOFBaseEstadistica.Inputs[Entrada de destino de OLE DB].Columns[Cod_SKU]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="18"
+                      cachedName="Cod_SKU"
+                      externalMetadataColumnId="Package\Base Estadistica\PVOFBaseEstadistica.Inputs[Entrada de destino de OLE DB].ExternalColumns[Cod_SKU]"
+                      lineageId="Package\Base Estadistica\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[Cod_SKU]" />
+                    <inputColumn
+                      refId="Package\Base Estadistica\PVOFBaseEstadistica.Inputs[Entrada de destino de OLE DB].Columns[FechaPedido]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="8"
+                      cachedName="FechaPedido"
+                      externalMetadataColumnId="Package\Base Estadistica\PVOFBaseEstadistica.Inputs[Entrada de destino de OLE DB].ExternalColumns[FechaPedido]"
+                      lineageId="Package\Base Estadistica\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[FechaPedido]" />
+                    <inputColumn
+                      refId="Package\Base Estadistica\PVOFBaseEstadistica.Inputs[Entrada de destino de OLE DB].Columns[Kilos]"
+                      cachedDataType="numeric"
+                      cachedName="Kilos"
+                      cachedPrecision="38"
+                      cachedScale="3"
+                      externalMetadataColumnId="Package\Base Estadistica\PVOFBaseEstadistica.Inputs[Entrada de destino de OLE DB].ExternalColumns[Kilos]"
+                      lineageId="Package\Base Estadistica\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[Kilos]" />
+                    <inputColumn
+                      refId="Package\Base Estadistica\PVOFBaseEstadistica.Inputs[Entrada de destino de OLE DB].Columns[PedidoNum]"
+                      cachedDataType="i8"
+                      cachedName="PedidoNum"
+                      externalMetadataColumnId="Package\Base Estadistica\PVOFBaseEstadistica.Inputs[Entrada de destino de OLE DB].ExternalColumns[PedidoNum]"
+                      lineageId="Package\Base Estadistica\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[PedidoNum]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Base Estadistica\PVOFBaseEstadistica.Inputs[Entrada de destino de OLE DB].ExternalColumns[Periodo]"
+                      codePage="1252"
+                      dataType="str"
+                      length="6"
+                      name="Periodo" />
+                    <externalMetadataColumn
+                      refId="Package\Base Estadistica\PVOFBaseEstadistica.Inputs[Entrada de destino de OLE DB].ExternalColumns[Cod_Cliente]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="Cod_Cliente" />
+                    <externalMetadataColumn
+                      refId="Package\Base Estadistica\PVOFBaseEstadistica.Inputs[Entrada de destino de OLE DB].ExternalColumns[JerarquiaProducto]"
+                      codePage="1252"
+                      dataType="str"
+                      length="18"
+                      name="JerarquiaProducto" />
+                    <externalMetadataColumn
+                      refId="Package\Base Estadistica\PVOFBaseEstadistica.Inputs[Entrada de destino de OLE DB].ExternalColumns[Cod_SKU]"
+                      codePage="1252"
+                      dataType="str"
+                      length="18"
+                      name="Cod_SKU" />
+                    <externalMetadataColumn
+                      refId="Package\Base Estadistica\PVOFBaseEstadistica.Inputs[Entrada de destino de OLE DB].ExternalColumns[FechaPedido]"
+                      codePage="1252"
+                      dataType="str"
+                      length="8"
+                      name="FechaPedido" />
+                    <externalMetadataColumn
+                      refId="Package\Base Estadistica\PVOFBaseEstadistica.Inputs[Entrada de destino de OLE DB].ExternalColumns[Kilos]"
+                      dataType="numeric"
+                      name="Kilos"
+                      precision="38"
+                      scale="3" />
+                    <externalMetadataColumn
+                      refId="Package\Base Estadistica\PVOFBaseEstadistica.Inputs[Entrada de destino de OLE DB].ExternalColumns[PedidoNum]"
+                      dataType="i8"
+                      name="PedidoNum" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Base Estadistica\PVOFBaseEstadistica.Outputs[Salida de error de destino de OLE DB]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Salida de error de destino de OLE DB"
+                  synchronousInputId="Package\Base Estadistica\PVOFBaseEstadistica.Inputs[Entrada de destino de OLE DB]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Base Estadistica\PVOFBaseEstadistica.Outputs[Salida de error de destino de OLE DB].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Base Estadistica\PVOFBaseEstadistica.Outputs[Salida de error de destino de OLE DB].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Base Estadistica\PVOFBaseEstadistica.Outputs[Salida de error de destino de OLE DB].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Base Estadistica\PVOFBaseEstadistica.Outputs[Salida de error de destino de OLE DB].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Base Estadistica.Paths[Salida de origen de OLE DB]"
+              endId="Package\Base Estadistica\PVOFBaseEstadistica.Inputs[Entrada de destino de OLE DB]"
+              name="Salida de origen de OLE DB"
+              startId="Package\Base Estadistica\Origen de OLE DB.Outputs[Salida de origen de OLE DB]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Codifica linea volumenes pvo"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Tarea Ejecutar SQL"
+      DTS:DTSID="{1E5CFC74-4329-41EB-9DED-E5641F143D8B}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Codifica linea volumenes pvo"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{E2FD2692-AB60-4B05-8A6D-A22A38EAAF70}"
+          SQLTask:SqlStatementSource="update PVOFMesXlsLineaCliente set&#xA;PVOFMesXlsLineaCliente.JerarquiaProducto= zProductHierarchyNodeN5.ProductHierarchyNode&#xA;FROM lukerVen.STGN.PVOFMesXlsLineaCliente PVOFMesXlsLineaCliente, lukerVen.STGN.zProductHierarchyNodeN5 zProductHierarchyNodeN5&#xA;WHERE PVOFMesXlsLineaCliente.Linea = zProductHierarchyNodeN5.ProductHierarchyNodeName&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Crea Calendario Ruta"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Tarea Ejecutar SQL"
+      DTS:DTSID="{AD2728FB-0587-4D21-9E30-2627A01D39AA}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Crea Calendario Ruta"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{E2FD2692-AB60-4B05-8A6D-A22A38EAAF70}"
+          SQLTask:SqlStatementSource="USE [lukerVen]&#xA;GO&#xA;&#xA;delete [PRON].[CalendarioRutas]&#xA;insert into [PRON].[CalendarioRutas]&#xA;-- Semanal&#xA;SELECT Time.Periodo&#xA;, 'S0' AS 'Frecuencia'&#xA;, Time.Week_Of_Year&#xA;, Time.Day_Of_Week  AS 'Dia_Semana'&#xA;, left(Time.Date_Name,charindex(',',Time.Date_Name)-1) Dia&#xA;, Time.PK_Date AS 'FechaVisita'&#xA;, Time.PK_Date AS 'FechaVisitaAjustada'&#xA;FROM lukerVen.dbo.Time [Time] inner join [PRON].[PVOFMesParametros] [PvoPar] on [PvoPar].Periodo = Time.Periodo&#xA;WHERE[EstadoPronostico] = 'Act'&#xA;order by 1,2,4,5,6&#xA;&#xA;-- Quincenal&#xA;insert into [PRON].[CalendarioRutas]&#xA;SELECT Time.Periodo&#xA;, 'Qp' AS 'Frecuencia'&#xA;, Time.Week_Of_Year&#xA;, Time.Day_Of_Week  AS 'Dia_Semana'&#xA;, left(Time.Date_Name,charindex(',',Time.Date_Name)-1) Dia&#xA;, Time.PK_Date AS 'FechaVisita'&#xA;, Time.PK_Date AS 'FechaVisitaAjustada'&#xA;&#xA;FROM lukerVen.dbo.Time [Time] inner join [PRON].[PVOFMesParametros] [PvoPar] on [PvoPar].Periodo = Time.Periodo&#xA;WHERE[EstadoPronostico] = 'Act'&#xA;and  Time.Week_Of_Year % 2 =0 &#xA;order by 1,2,4,5,6&#xA;&#xA;-- Quincenal&#xA;insert into [PRON].[CalendarioRutas]&#xA;SELECT Time.Periodo&#xA;, 'Qi' AS 'Frecuencia'&#xA;, Time.Week_Of_Year&#xA;, Time.Day_Of_Week  AS 'Dia_Semana'&#xA;, left(Time.Date_Name,charindex(',',Time.Date_Name)-1) Dia&#xA;, Time.PK_Date AS 'FechaVisita'&#xA;, Time.PK_Date AS 'FechaVisitaAjustada'&#xA;&#xA;FROM lukerVen.dbo.Time [Time] inner join [PRON].[PVOFMesParametros] [PvoPar] on [PvoPar].Periodo = Time.Periodo&#xA;WHERE[EstadoPronostico] = 'Act'&#xA;and  Time.Week_Of_Year % 2 =1 &#xA;order by 1,2,4,5,6" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\de base estadistica"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Tarea Ejecutar SQL"
+      DTS:DTSID="{BFA47283-9E7F-4062-B2C0-39CAF4B987B8}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="de base estadistica"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{E2FD2692-AB60-4B05-8A6D-A22A38EAAF70}"
+          SQLTask:SqlStatementSource="USE [lukerVen]&#xA;GO&#xA;&#xA;/****** Object:  Table [PRON].[PVOFBaseEstadistica]    Script Date: 7/15/2019 4:29:51 PM ******/&#xA;DROP TABLE [PRON].[PVOFBaseEstadistica]&#xA;GO&#xA;&#xA;/****** Object:  Table [PRON].[PVOFBaseEstadistica]    Script Date: 7/15/2019 4:29:51 PM ******/&#xA;SET ANSI_NULLS ON&#xA;GO&#xA;&#xA;SET QUOTED_IDENTIFIER ON&#xA;GO&#xA;&#xA;CREATE TABLE [PRON].[PVOFBaseEstadistica](&#xA;&#x9;[Periodo] [varchar](6) NOT NULL,&#xA;&#x9;[Cod_Cliente] [varchar](10) NOT NULL,&#xA;&#x9;[JerarquiaProducto] [varchar](18) NOT NULL,&#xA;&#x9;[Cod_SKU] [varchar](18) NOT NULL,&#xA;&#x9;[FechaPedido] [varchar](8) NOT NULL,&#xA;&#x9;[Kilos] [numeric](38, 3) NULL,&#xA;&#x9;[PedidoNum] [bigint] NULL,&#xA; CONSTRAINT [PK_PVOFBaseEstadistica] PRIMARY KEY CLUSTERED &#xA;(&#xA;&#x9;[Periodo] ASC,&#xA;&#x9;[Cod_Cliente] ASC,&#xA;&#x9;[JerarquiaProducto] ASC,&#xA;&#x9;[Cod_SKU] ASC,&#xA;&#x9;[FechaPedido] ASC&#xA;)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]&#xA;) ON [PRIMARY]&#xA;GO&#xA;&#xA;&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Frecuencia"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Tarea Ejecutar SQL"
+      DTS:DTSID="{7A07822C-27BB-4FE5-98C5-EEF566E4FC9E}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Frecuencia"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{E2FD2692-AB60-4B05-8A6D-A22A38EAAF70}"
+          SQLTask:SqlStatementSource="update PVOFMesXlsLineaCliente set&#xA;PVOFMesXlsLineaCliente.VisitaFrecuencia = REPLACE( FrecuenciaTelebox.Frecuencia, '?' ,  case  Datepart (week ,PVOFMesXlsLineaCliente.UltimaVisitaMAFecha) % 2  when 1 then'i' else 'p' end)&#xA;, PVOFMesXlsLineaCliente.VisitaDia_Semana= FrecuenciaTelebox.Dia_Semana&#xA;FROM lukerVen.SD.Clientes Clientes, lukerVen.PRON.FrecuenciaTelebox FrecuenciaTelebox, lukerVen.PRON.PVOFMesXlsLineaCliente PVOFMesXlsLineaCliente&#xA;WHERE Clientes.Cod_Cliente = PVOFMesXlsLineaCliente.Cod_Cliente AND Clientes.Cod_Ruta = FrecuenciaTelebox.Telebox" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\PresupuestoCOM"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Tarea Ejecutar SQL"
+      DTS:DTSID="{471692F9-2549-4159-8CD0-DF73D4871F33}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="PresupuestoCOM"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{E2FD2692-AB60-4B05-8A6D-A22A38EAAF70}"
+          SQLTask:SqlStatementSource="delete [SD].[PresupuestoCOM]&#xA;insert into [SD].[PresupuestoCOM]&#xA;SELECT &#xA;PVOFMesXlsLineaCliente.Periodo&#xA;, CalendarioRutas.FechaVisita&#xA;, PVOFMesXlsLineaCliente.Cod_Cliente&#xA;, PVOFMesXlsLineaCliente.JerarquiaProducto&#xA;, PVOFBaseEstadisticaTotSKU.Cod_SKU&#xA;--, PVOFMesXlsLineaCliente.Linea&#xA;&#xA;, PVOFMesXlsLineaCliente.Kilos_PVOF * (PVOFBaseEstadisticaTotSKU.Kilos/PVOFMesXlsLineaCliente.KilosTotPedMA) / CalendarioRutasNumVisitas.NumVisitas as Kilos_PVOF&#xA;, PVOFMesXlsLineaCliente.Valor_Neto_PVOF * (PVOFBaseEstadisticaTotSKU.Kilos/PVOFMesXlsLineaCliente.KilosTotPedMA) / CalendarioRutasNumVisitas.NumVisitas as Valor_Neto_PVOF&#xA;  &#xA;FROM lukerVen.PRON.CalendarioRutas CalendarioRutas, lukerVen.PRON.CalendarioRutasNumVisitas CalendarioRutasNumVisitas, lukerVen.PRON.PVOFBaseEstadisticaTotSKU PVOFBaseEstadisticaTotSKU, lukerVen.PRON.PVOFMesXlsLineaCliente PVOFMesXlsLineaCliente&#xA;WHERE PVOFBaseEstadisticaTotSKU.Cod_Cliente = PVOFMesXlsLineaCliente.Cod_Cliente &#xA;AND PVOFBaseEstadisticaTotSKU.JerarquiaProducto = PVOFMesXlsLineaCliente.JerarquiaProducto &#xA;AND PVOFBaseEstadisticaTotSKU.Periodo = PVOFMesXlsLineaCliente.Periodo &#xA;AND CalendarioRutas.Periodo = PVOFBaseEstadisticaTotSKU.Periodo &#xA;AND CalendarioRutas.Periodo = PVOFMesXlsLineaCliente.Periodo &#xA;AND PVOFMesXlsLineaCliente.VisitaFrecuencia = CalendarioRutas.Frecuencia &#xA;AND PVOFMesXlsLineaCliente.VisitaDia_Semana = CalendarioRutas.Dia_Semana &#xA;AND CalendarioRutasNumVisitas.Dia_Semana = CalendarioRutas.Dia_Semana &#xA;AND CalendarioRutasNumVisitas.Frecuencia = CalendarioRutas.Frecuencia &#xA;AND CalendarioRutasNumVisitas.Periodo = CalendarioRutas.Periodo" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\pvof from stgn to mes"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Tarea Ejecutar SQL"
+      DTS:DTSID="{3313B889-1C90-4315-B071-B4D95EDC8252}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="pvof from stgn to mes"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{E2FD2692-AB60-4B05-8A6D-A22A38EAAF70}"
+          SQLTask:SqlStatementSource="USE [lukerVen]&#xA;GO&#xA;delete [PRON].[PVOFMesXlsLineaCliente]&#xA;INSERT INTO [PRON].[PVOFMesXlsLineaCliente]&#xA;           ([Periodo]&#xA;           ,[Cod_Cliente]&#xA;           ,[JerarquiaProducto]&#xA;           ,[Linea]&#xA;           ,[Kilos_PVOF]&#xA;           ,[Valor_Neto_PVOF]&#xA;)&#xA;SELECT PVOFMesXlsLineaCliente.Periodo&#xA;, PVOFMesXlsLineaCliente.Cod_Cliente&#xA;, PVOFMesXlsLineaCliente.JerarquiaProducto&#xA;, Max(PVOFMesXlsLineaCliente.Linea) AS 'Max of Linea'&#xA;, Sum(PVOFMesXlsLineaCliente.Kilos_PVOF) AS 'Sum of Kilos_PVOF'&#xA;, Sum(PVOFMesXlsLineaCliente.Valor_Neto_PVOF) AS 'Sum of Valor_Neto_PVOF'&#xA;FROM lukerVen.STGN.PVOFMesXlsLineaCliente PVOFMesXlsLineaCliente&#xA;GROUP BY PVOFMesXlsLineaCliente.Periodo, PVOFMesXlsLineaCliente.Cod_Cliente, PVOFMesXlsLineaCliente.JerarquiaProducto&#xA;HAVING (PVOFMesXlsLineaCliente.JerarquiaProducto Is Not Null)&#xA;GO&#xA;&#xA;&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\totales y huerfanos"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Tarea Ejecutar SQL"
+      DTS:DTSID="{854B8447-95D8-44CE-BDEC-A33C3F916884}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="totales y huerfanos"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{E2FD2692-AB60-4B05-8A6D-A22A38EAAF70}"
+          SQLTask:SqlStatementSource="update PVOFMesXlsLineaCliente set&#xA;  PVOFMesXlsLineaCliente.PrimeraVisitaMAFecha= PVOFBaseEstadisticaTotLinDescrpt.PrimeraVisitaMAFecha&#xA;, PVOFMesXlsLineaCliente.UltimaVisitaMAFecha= PVOFBaseEstadisticaTotLinDescrpt.UltimaVisitaMAFecha&#xA;, PVOFMesXlsLineaCliente.KilosPrimPedMA= PVOFMesXlsLineaCliente.KilosUltPedMA&#xA;, PVOFMesXlsLineaCliente.KilosTotPedMA= PVOFBaseEstadisticaTotLinDescrpt.TotKilos&#xA;, PVOFMesXlsLineaCliente.NumTotPed= PVOFBaseEstadisticaTotLinDescrpt.UltimoPedidoNum&#xA;, PVOFMesXlsLineaCliente.Orphn= 0&#xA;FROM lukerVen.PRON.PVOFBaseEstadisticaTotLinDescrpt PVOFBaseEstadisticaTotLinDescrpt&#xA;, lukerVen.PRON.PVOFMesXlsLineaCliente PVOFMesXlsLineaCliente&#xA;WHERE PVOFBaseEstadisticaTotLinDescrpt.Cod_Cliente = PVOFMesXlsLineaCliente.Cod_Cliente &#xA;AND PVOFBaseEstadisticaTotLinDescrpt.JerarquiaProducto = PVOFMesXlsLineaCliente.JerarquiaProducto &#xA;AND PVOFBaseEstadisticaTotLinDescrpt.Periodo = PVOFMesXlsLineaCliente.Periodo" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Restricción]"
+      DTS:CreationName=""
+      DTS:DTSID="{EB207B25-0FF2-471D-9E94-264D0A2D4A19}"
+      DTS:From="Package\Crea Calendario Ruta"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Restricción"
+      DTS:To="Package\Codifica linea volumenes pvo" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Restricción 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{C528D91C-2265-455E-8EEE-BDE41C4C3422}"
+      DTS:From="Package\Codifica linea volumenes pvo"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Restricción 1"
+      DTS:To="Package\pvof from stgn to mes" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Restricción 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{11C04ADF-768D-4BF9-B8FB-CAA51E7D3CCD}"
+      DTS:From="Package\totales y huerfanos"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Restricción 2"
+      DTS:To="Package\Frecuencia" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Restricción 3]"
+      DTS:CreationName=""
+      DTS:DTSID="{D6A80EF2-28B7-4A75-B871-0EE5B9B90039}"
+      DTS:From="Package\Base Estadistica"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Restricción 3"
+      DTS:To="Package\totales y huerfanos" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Restricción 4]"
+      DTS:CreationName=""
+      DTS:DTSID="{01D9735F-CA1B-478D-AFEC-40811042E91F}"
+      DTS:From="Package\pvof from stgn to mes"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Restricción 4"
+      DTS:To="Package\de base estadistica" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Restricción 5]"
+      DTS:CreationName=""
+      DTS:DTSID="{2CFD4227-2624-4E77-830B-E13A400C1F6B}"
+      DTS:From="Package\de base estadistica"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Restricción 5"
+      DTS:To="Package\Base Estadistica" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Restricción 6]"
+      DTS:CreationName=""
+      DTS:DTSID="{C516AD5E-4B0E-444E-9724-A1A236B072B3}"
+      DTS:From="Package\Frecuencia"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Restricción 6"
+      DTS:To="Package\PresupuestoCOM" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--Esta sección CDATA contiene la información de diseño del paquete. Esta sección incluye información como, por ejemplo, las coordenadas (x,y), el ancho y el alto.-->
+<!--Si edita manualmente esta sección y comete un error, puede eliminarlo. -->
+<!--El paquete podrá cargarse normalmente, pero se perderá la información de diseño anterior y el diseñador reorganizará los elementos automáticamente en la superficie de diseño.-->
+<Objects
+  Version="8">
+  <!--Cada uno de los nodos siguientes contiene propiedades que no afectan al comportamiento en tiempo de ejecución.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="153.6,41.6"
+          Id="Package\Base Estadistica"
+          TopLeft="52.0000008855547,340.92773587382" />
+        <NodeLayout
+          Size="170.4,58.4"
+          Id="Package\Codifica linea volumenes pvo"
+          TopLeft="46.9387763095667,113.613446971537" />
+        <NodeLayout
+          Size="169.6,41.6"
+          Id="Package\Crea Calendario Ruta"
+          TopLeft="41.1428578435158,46.4941182991213" />
+        <NodeLayout
+          Size="168,41.6"
+          Id="Package\de base estadistica"
+          TopLeft="47.5918375451781,263.058827218712" />
+        <NodeLayout
+          Size="128.8,41.6"
+          Id="Package\Frecuencia"
+          TopLeft="54.6938784824516,478.924376464633" />
+        <NodeLayout
+          Size="158.4,41.6"
+          Id="Package\PresupuestoCOM"
+          TopLeft="42.0408170424815,543.159671483156" />
+        <NodeLayout
+          Size="183.2,41.6"
+          Id="Package\pvof from stgn to mes"
+          TopLeft="40.000000681196,194.366389280537" />
+        <NodeLayout
+          Size="168.8,41.6"
+          Id="Package\totales y huerfanos"
+          TopLeft="36.7346945031391,410.75630828171" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Restricción]"
+          TopLeft="129.040817076541,88.0941182991213">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,25.5193286724153"
+              Start="0,0"
+              End="0,18.0193286724153">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,18.0193286724153" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Restricción 1]"
+          TopLeft="217.338776309567,142.813446971537">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="5.86122437162928,72.3529423090004"
+              Start="0,0"
+              End="13.3612243716293,72.3529423090004">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="24.3612243716293,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="24.3612243716293,0"
+                    Point2="28.3612243716293,0"
+                    Point3="28.3612243716293,4" />
+                  <mssgle:LineSegment
+                    End="28.3612243716293,68.3529423090004" />
+                  <mssgle:CubicBezierSegment
+                    Point1="28.3612243716293,68.3529423090004"
+                    Point2="28.3612243716293,72.3529423090004"
+                    Point3="24.3612243716293,72.3529423090004" />
+                  <mssgle:LineSegment
+                    End="13.3612243716293,72.3529423090004" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Restricción 2]"
+          TopLeft="120.114286492795,452.35630828171">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,26.5680681829221"
+              Start="0,0"
+              End="0,19.0680681829221">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,19.0680681829221" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Restricción 3]"
+          TopLeft="124.967347694347,382.52773587382">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,28.2285724078908"
+              Start="0,0"
+              End="0,20.7285724078908">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,20.7285724078908" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Restricción 4]"
+          TopLeft="131.595919113187,235.966389280537">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,27.092437938175"
+              Start="0,0"
+              End="0,19.592437938175">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,19.592437938175" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Restricción 5]"
+          TopLeft="130.195919215366,304.658827218712">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,36.268908655108"
+              Start="0,0"
+              End="0,28.768908655108">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,28.768908655108" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Restricción 6]"
+          TopLeft="120.167347762467,520.524376464633">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,22.635295018523"
+              Start="0,0"
+              End="0,15.135295018523">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,15.135295018523" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Base Estadistica">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="175.2,41.6"
+          Id="Package\Base Estadistica\PVOFBaseEstadistica"
+          TopLeft="50.2857151420749,157.223531616765" />
+        <NodeLayout
+          Size="163.2,41.6"
+          Id="Package\Base Estadistica\Origen de OLE DB"
+          TopLeft="53.1428580478746,63.6235303040607" />
+        <EdgeLayout
+          Id="Package\Base Estadistica.Paths[Salida de origen de OLE DB]"
+          TopLeft="136.314286594975,105.223530304061">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,52.0000013127047"
+              Start="0,0"
+              End="0,44.5000013127047">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,44.5000013127047" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Base Estadistica\Origen de OLE DB">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Base Estadistica\PVOFBaseEstadistica">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

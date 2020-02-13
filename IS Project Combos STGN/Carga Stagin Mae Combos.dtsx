@@ -1,0 +1,146 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="4/3/2019 10:23:33 AM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="LAPTOP-MFGK5CPU"
+  DTS:CreatorName="LAPTOP-MFGK5CPU\fvalb"
+  DTS:DTSID="{0FDE98E7-5210-4FA0-9C9B-3742930DC82A}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="15.0.1100.123"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Carga Stagin Mae Combos"
+  DTS:PackageType="5"
+  DTS:VersionBuild="2"
+  DTS:VersionGUID="{4CB8E6A5-917F-4D50-B172-9E76CDE38234}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[svidblukmz03.lukerFin.sa]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{EBB57219-1DEC-46BC-BAF1-8BE47F99CCF8}"
+      DTS:ObjectName="svidblukmz03.lukerFin.sa">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=svidblukmz03;User ID=sa;Initial Catalog=lukerFin;Provider=SQLNCLI11.1;Persist Security Info=True;Auto Translate=False;">
+          <DTS:Password
+            DTS:Name="Password"
+            Sensitive="1"
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAES1ZGSMj5Emvum3Wlxp7/AAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAACX/ev/rJppIKJwq6Yt6d0CHe5AsWjNY+Xry8lejOcOgQAAAAAOgAAAAAIAACAAAAAhZYL+osid9f3UdOB6Wen+tcKK0T8JBDoHN6xQJhpqQyAAAABc+ZhDHgGA0kNPgUPUj2oHftgIsZmeByNkTchEKsxg6EAAAADt/pq3D5thOkgsye+DbOjPN2X5mDcOZlYnLkVNOa0AOtt/1B3Cihi53PEdgr4Upl4Ig7y61NnyZx5w/EpU6rkA</DTS:Password>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Ner STGN_SD_MaterialBOM"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Tarea Ejecutar SQL"
+      DTS:DTSID="{1BD3673A-BAF1-4491-AA1B-18CF8D265FA6}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Ner STGN_SD_MaterialBOM"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{EBB57219-1DEC-46BC-BAF1-8BE47F99CCF8}"
+          SQLTask:SqlStatementSource="delete [lukerVen].[STGN].[MaterialBOM]&#xA;insert into [lukerVen].[STGN].[MaterialBOM]&#xA;SELECT &#xA;  &quot;MaterialFac&quot;&#x9;&#x9;&#x9;AS Cod_SKU&#xA;, &quot;MaterialRgl&quot;&#x9;&#x9;&#x9;AS Con_SKUR&#xA;, &quot;Planta&quot;&#x9;&#x9;&#x9;&#x9;AS Planta&#xA;, &quot;STLKN&quot;&#x9;&#x9;&#x9;&#x9;AS STLKN&#xA;, &quot;Unidad&quot;&#xA;, &quot;Unidades&quot;&#xA;, &quot;SORTF&quot;&#xA;, &quot;MaterialNetWeight&quot;&#xA;, &quot;MaterialWeightUnit&quot;&#xA;, &quot;Z_UnidadesRegalo&quot;&#xA;FROM &quot;CWP&quot;..&quot;_SYS_BIC&quot;.&quot;BI_LUKER_AD.SD/zMaterialBasicDataBOM&quot;&#xA;&#xA;declare @xwhere varchar(4)&#xA;&#xA;&#xA;DECLARE ciclo_cursor CURSOR FOR &#xA;SELECT DISTINCT MaterialBOM.Planta&#xA;FROM lukerVen.STGN.MaterialBOM MaterialBOM where MaterialBOM.Planta&lt;&gt;'CD01'&#xA;ORDER BY MaterialBOM.Planta&#xA;&#xA;OPEN ciclo_cursor&#xA;FETCH NEXT FROM ciclo_cursor &#xA;INTO @xwhere&#xA;&#xA;WHILE @@FETCH_STATUS = 0&#xA;BEGIN  &#xA;&#xA;insert into [lukerVen].[STGN].[MaterialBOM]&#xA;SELECT MaterialBOM.Cod_SKU, MaterialBOM.Con_SKUR, 'cd01', MaterialBOM.STLKN, MaterialBOM.Unidad, MaterialBOM.Unidades, MaterialBOM.SORTF, MaterialBOM.MaterialNetWeight, MaterialBOM.MaterialWeightUnit, MaterialBOM.Z_UnidadesRegalo&#xA;FROM lukerVen.STGN.MaterialBOM MaterialBOM&#xA;WHERE (MaterialBOM.Planta=@xwhere)&#xA;and MaterialBOM.Cod_SKU not in (&#xA;&#x9;select MaterialBOM.Cod_SKU FROM lukerVen.STGN.MaterialBOM MaterialBOM&#xA;WHERE (MaterialBOM.Planta='CD01')&#xA;)&#xA;&#xA;   FETCH NEXT FROM ciclo_cursor &#xA;   INTO @xwhere &#xA;&#xA;END&#xA;CLOSE ciclo_cursor&#xA;DEALLOCATE ciclo_cursor&#xA;&#xA;--- Marca T1&#xA;&#xA;update ComboHD set&#xA;  ComboHD.Tipo= 'T1'&#xA;, ComboHD.NumSKUs= MaterialBOM_T1.NumSKUs&#xA;FROM lukerVen.SD.ComboHD ComboHD, lukerVen.STGN.MaterialBOM_T1 MaterialBOM_T1&#xA;WHERE MaterialBOM_T1.Cod_SKU = ComboHD.Cod_SKU&#xA;&#xA;update ComboHD set&#xA;  ComboHD.Tipo= 'T2+Z'&#xA;, ComboHD.NumSKUs= MaterialBOM_T2_PlusZreg.NumSKUs&#xA;FROM lukerVen.SD.ComboHD ComboHD, lukerVen.STGN.MaterialBOM_T2_PlusZreg MaterialBOM_T2_PlusZreg&#xA;WHERE MaterialBOM_T2_PlusZreg.Cod_SKU = ComboHD.Cod_SKU&#xA;&#xA;&#xA;update ComboHD set&#xA;  ComboHD.Tipo= 'T2'&#xA;, ComboHD.NumSKUs= MaterialBOM_T2.NumSKUs&#xA;FROM lukerVen.SD.ComboHD ComboHD&#xA;  , lukerVen.STGN.MaterialBOM_T2 MaterialBOM_T2&#xA;WHERE MaterialBOM_T2.Cod_SKU = ComboHD.Cod_SKU&#xA;&#xA;update ComboHD set&#xA;  ComboHD.Tipo= 'T4'&#xA;, ComboHD.NumSKUs= MaterialBOM_T2.NumSKUs&#xA;FROM lukerVen.SD.ComboHD ComboHD&#xA;  , lukerVen.STGN.MaterialBOM_T4 MaterialBOM_T2&#xA;WHERE MaterialBOM_T2.Cod_SKU = ComboHD.Cod_SKU&#xA;&#xA;update ComboHD set&#xA;  ComboHD.Tipo= 'T3'&#xA;FROM lukerVen.SD.ComboHD ComboHD, lukerVen.SD.Productos Productos&#xA;WHERE Productos.Cod_SKU = ComboHD.Cod_SKU AND ((ComboHD.Tipo='') &#xA;AND ( (Productos.Nombre_SKU Like '%desc%') &#xA;&#x9;OR (ComboHD.Tipo='') AND (Productos.Nombre_SKU Like '%DTO%') &#xA;&#x9;OR (ComboHD.Tipo='') AND (Productos.Nombre_SKU Like '%DCTO%') &#xA;&#x9;OR (ComboHD.Tipo='') AND (Productos.Nombre_SKU Like '%ahorr%')&#xA;&#x9;OR (ComboHD.Tipo='') AND (Productos.Nombre_SKU Like '% PG % LL%')&#xA;&#x9;OR (ComboHD.Tipo='') AND (Productos.Nombre_SKU Like '% PAG% LLev%')&#xA;&#x9;OR (ComboHD.Tipo='') AND (Productos.Nombre_SKU Like '%PG%LL%')&#xA;&#x9;OR (ComboHD.Tipo='') AND (Productos.Nombre_SKU  Like '%[%]%')&#xA;&#x9;OR (ComboHD.Tipo='') AND (Productos.Nombre_SKU  Like '% LL %')&#xA;&#x9;OR (ComboHD.Tipo='') AND (Productos.Nombre_SKU  Like '% LLEV %')&#xA;&#x9;OR (ComboHD.Tipo='') AND (Productos.Nombre_SKU  Like '% LL%')&#xA;&#x9;OR (ComboHD.Tipo='') AND (Productos.Nombre_SKU  Like 'CO $%')&#xA;&#x9;OR (ComboHD.Tipo='') AND (Productos.Nombre_SKU  Like '% precio %')&#xA;) or ComboHD.Cod_SKU in (&#xA; &#xA;&#x9; '000000000007100761'&#x9;&#x9;-- COMBO PROD. NUEVOS 2&#xA;&#x9;,'000000000007101052'&#x9;&#x9;-- CO 4 GFAMILIA 1000CC GTS OLIOSOYA500CC&#xA;&#x9;,'000000000007101187'&#x9;&#x9;-- CO LUKI MORADO + 2 OFERTAS SHARPIE LUKI&#xA;&#x9;,'000000000007101243'&#x9;&#x9;-- CO CUBIERTA,COB BLANCA1KG Y CREMA POLV&#xA;&#x9;,'000000000007101245'&#x9;&#x9;-- CO CUBIERTA, COB NEGRA 1KG Y CREM POLV&#xA;&#x9;,'000000000007101268'&#x9;&#x9;-- CO2LUKERD32 500G BONORECOMPRAX 5000&#xA;&#x9;,'000000000007101507'&#x9;&#x9;-- CO  COMBO 5 LIBRAS LUKAFE CLASICO&#xA;&#x9;,'000000000007102098'&#x9;&#x9;-- CO 10 CAJASQUESURTIDO 500 P20&#xA;&#x9;,'000000000007102099'&#x9;&#x9;-- CO 10 CAJAS QUESURTIDO 500 P16&#xA;))&#xA;&#xA;update ComboHD set&#xA; ComboHD.NumSKUs= MaterialBOM_NumSKUs.NumSKUs&#xA;FROM lukerVen.SD.ComboHD ComboHD, SD.ComboBOM_NumSKUs MaterialBOM_NumSKUs&#xA;WHERE MaterialBOM_NumSKUs.Cod_SKU = ComboHD.Cod_SKU AND ((ComboHD.NumSKUs&lt;&gt;MaterialBOM_NumSKUs.NumSKUs))&#xA;&#xA;&#xA;&#xA;insert into [SD].[ComboBOM]&#xA;SELECT MaterialBOM.Cod_SKU, MaterialBOM.Con_SKUR, MaterialBOM.STLKN, MaterialBOM.SORTF, MaterialBOM.Unidades, MaterialBOM.Unidad, 0, 0, 0, MaterialBOM.Z_UnidadesRegalo&#xA;FROM lukerVen.SD.ComboHD ComboHD, lukerVen.STGN.MaterialBOM MaterialBOM&#xA;WHERE ComboHD.Cod_SKU = MaterialBOM.Cod_SKU AND ((MaterialBOM.Planta='cd01'))&#xA;and  MaterialBOM.Cod_SKU not in (&#xA;select Cod_SKU from [SD].[ComboBOM]&#xA;)&#xA;&#xA;&#xA;update ComboBOM set&#xA; ComboBOM.PrecioLista= pptoListaPreciosSD_NACIONAL.precioUbEne&#xA;FROM lukerVen.SD.ComboBOM ComboBOM, lukerVen.dbo.pptoListaPreciosSD_NACIONAL pptoListaPreciosSD_NACIONAL&#xA;WHERE ComboBOM.Con_SKUR = pptoListaPreciosSD_NACIONAL.idMaterial AND ((pptoListaPreciosSD_NACIONAL.ano=2019))&#xA;&#xA;--- Descuentos Marcados erronesmente en Z&#xA;update ComboBOM set&#xA; ComboBOM.UnidadesZ= 0&#xA;FROM lukerVen.SD.ComboBOM ComboBOM, lukerVen.SD.ComboHD ComboHD, lukerVen.SD.Productos Productos, lukerVen.SD.Productos Productos_1&#xA;WHERE ComboHD.Cod_SKU = ComboBOM.Cod_SKU &#xA;AND Productos.Cod_SKU = ComboBOM.Cod_SKU &#xA;AND ComboBOM.Con_SKUR = Productos_1.Cod_SKU &#xA;AND ((ComboBOM.TipoPos&lt;&gt;'REGALO') &#xA;AND (ComboHD.NumSKUs&gt;1) &#xA;AND (ComboBOM.UnidadesZ&lt;&gt;0.0) &#xA;AND (Productos.Nombre_SKU Like '%Pague%'))&#xA;AND (ComboHD.Tipo='T2+Z')&#xA;&#xA;update ComboHD set&#xA;   ComboHD.NumSKUs= 0&#xA; , ComboHD.Tipo= 'T3-Z'&#xA;FROM lukerVen.SD.ComboBOM ComboBOM&#xA;, lukerVen.SD.ComboHD ComboHD&#xA;, lukerVen.SD.Productos Productos&#xA;, lukerVen.SD.Productos Productos_1&#xA;WHERE ComboHD.Cod_SKU = ComboBOM.Cod_SKU &#xA;AND Productos.Cod_SKU = ComboBOM.Cod_SKU &#xA;AND ComboBOM.Con_SKUR = Productos_1.Cod_SKU &#xA;AND ((ComboBOM.TipoPos&lt;&gt;'REGALO') &#xA;AND (ComboHD.NumSKUs&gt;1) &#xA;AND (Productos.Nombre_SKU Like '%Pague%') &#xA;AND (ComboHD.Tipo='T2+Z'))&#xA;&#xA;&#xA;update ComboHD set&#xA;   ComboHD.Tipo= 'T4_8'&#xA;FROM lukerVen.SD.ComboBOM ComboBOM&#xA;, lukerVen.SD.ComboHD ComboHD&#xA;, lukerVen.SD.Productos Productos&#xA;, HBAVENNAL.dbo.zMATERIALES zMATERIALES&#xA;WHERE ComboHD.Cod_SKU = ComboBOM.Cod_SKU &#xA;AND Productos.Cod_SKU = ComboBOM.Cod_SKU &#xA;AND ComboBOM.Con_SKUR = zMATERIALES.Material &#xA;AND ((ComboHD.NumSKUs=2) AND (ComboBOM.TipoPos='REGALO') &#xA;AND (ComboBOM.Con_SKUR Like '000000000008%'))&#xA;&#xA;--------------------------&#xA;---- % para explosiones --&#xA;--------------------------&#xA;&#xA;Update ComboBOM set &#xA;  ComboBOM.PorcentPrecioVenta&#x9;= ComboBOM_PrecioBase.ValorBase/ComboBOM_PrecioBaseT.ValorBaseT&#xA;, ComboBOM.PorcentPeso&#x9;&#x9;&#x9;= ComboBOM_PrecioBase.PesoBase/ComboBOM_PrecioBaseT.PesoBaseT&#xA;FROM lukerVen.SD.ComboBOM ComboBOM&#xA;, lukerVen.SD.ComboBOM_PrecioBase ComboBOM_PrecioBase&#xA;, lukerVen.SD.ComboBOM_PrecioBaseT ComboBOM_PrecioBaseT&#xA;, lukerVen.SD.Productos Productos&#xA;WHERE ComboBOM_PrecioBase.Cod_SKU = ComboBOM.Cod_SKU &#xA;AND ComboBOM_PrecioBase.Con_SKUR = ComboBOM.Con_SKUR &#xA;AND ComboBOM_PrecioBase.Consecutivo = ComboBOM.Consecutivo &#xA;AND ComboBOM_PrecioBaseT.Cod_SKU = ComboBOM.Cod_SKU &#xA;AND Productos.Cod_SKU = ComboBOM.Cod_SKU&#xA;and ComboBOM_PrecioBaseT.ValorBaseT &lt;&gt;0&#xA;and ComboBOM_PrecioBaseT.PesoBaseT &lt;&gt;0&#xA;&#xA;&#xA;update ComboBOM set&#xA;  ComboBOM.PorcentBonifica&#x9;&#x9;= 1&#xA;, ComboBOM.PorcentDescuento&#x9;&#x9;= 1&#xA;, ComboBOM.PorcentPrecioVenta&#x9;= 1&#xA;FROM lukerVen.SD.ComboBOM ComboBOM&#xA;, lukerVen.SD.ComboHD ComboHD&#xA;, lukerVen.SD.Productos Productos&#xA;, HBAVENNAL.dbo.zMATERIALES zMATERIALES&#xA;WHERE ComboHD.Cod_SKU = ComboBOM.Cod_SKU &#xA;AND Productos.Cod_SKU = ComboBOM.Cod_SKU &#xA;AND ComboBOM.Con_SKUR = zMATERIALES.Material &#xA;AND ((ComboHD.NumSKUs=1) OR (ComboHD.NumSKUs=2) AND (ComboHD.Tipo='T4%'))&#xA;&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\New SD_ComboHD"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Tarea Ejecutar SQL"
+      DTS:DTSID="{451B9733-FE1F-4040-B832-F204F4211214}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="New SD_ComboHD"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{EBB57219-1DEC-46BC-BAF1-8BE47F99CCF8}"
+          SQLTask:SqlStatementSource="USE [lukerVen]&#xA;GO&#xA;&#xA;---HD&#xA;INSERT INTO lukerVen.[SD].[ComboHD]&#xA;           ([Cod_SKU]&#xA;           ,[Visto]&#xA;           ,[Objetivo])&#xA;&#xA;&#xA;&#xA;SELECT  Facturas.Cod_SKU, Max(Facturas.FechaFactura) AS 'Max of FechaFactura','New'&#xA;FROM  [HBAVENNAL].[STGN].[zFacBill]  Facturas&#xA;where Facturas.Cod_SKU not in (&#xA;&#x9;SELECT ComboHD.Cod_SKU&#xA;&#x9;FROM lukerVen.SD.ComboHD ComboHD&#xA;) and (Facturas.BillingDocumentDate Like '201903%') AND (Facturas.Cod_SKU Like '000000000007%')&#xA;GROUP BY Facturas.Cod_SKU &#xA;--BOM&#xA;&#xA;&#xA;insert into lukerVen.SD.ComboBOM&#xA;SELECT MaterialBOM.Cod_SKU, MaterialBOM.Con_SKUR, MaterialBOM.STLKN, MaterialBOM.SORTF, MaterialBOM.Unidades, MaterialBOM.Unidad, 0, 0, 0, 0, MaterialBOM.Z_UnidadesRegalo, 0, MaterialBOM.MaterialNetWeight--, MaterialBOM.MaterialWeightUnit&#xA;FROM lukerVen.SD.ComboHD ComboHD, lukerVen.STGN.MaterialBOM MaterialBOM&#xA;WHERE ComboHD.Cod_SKU = MaterialBOM.Cod_SKU AND ( (MaterialBOM.Planta='CD01'))&#xA;and  MaterialBOM.Cod_SKU not in (&#xA;&#x9;select ComboBOM.Cod_SKU from lukerVen.SD.ComboBOM&#xA;)&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Plano lista precios"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Tarea Ejecutar SQL"
+      DTS:DTSID="{21D3C325-A5C1-47F6-84C8-68F05645AAF6}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Plano lista precios"
+      DTS:ThreadHint="1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{EBB57219-1DEC-46BC-BAF1-8BE47F99CCF8}"
+          SQLTask:SqlStatementSource="--" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Restricción]"
+      DTS:CreationName=""
+      DTS:DTSID="{535B3D1E-1002-496C-BD2F-04744FB5AC2C}"
+      DTS:From="Package\New SD_ComboHD"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Restricción"
+      DTS:To="Package\Ner STGN_SD_MaterialBOM" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--Esta sección CDATA contiene la información de diseño del paquete. Esta sección incluye información como, por ejemplo, las coordenadas (x,y), el ancho y el alto.-->
+<!--Si edita manualmente esta sección y comete un error, puede eliminarlo. -->
+<!--El paquete podrá cargarse normalmente, pero se perderá la información de diseño anterior y el diseñador reorganizará los elementos automáticamente en la superficie de diseño.-->
+<Objects
+  Version="8">
+  <!--Cada uno de los nodos siguientes contiene propiedades que no afectan al comportamiento en tiempo de ejecución.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="208.8,41.6"
+          Id="Package\Ner STGN_SD_MaterialBOM"
+          TopLeft="70.2857154826729,143.152943184137" />
+        <NodeLayout
+          Size="168.8,41.6"
+          Id="Package\New SD_ComboHD"
+          TopLeft="89.7142872421109,62.4000008751365" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Restricción]"
+          TopLeft="174.400001362392,104.000000875136">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,39.1529423090001"
+              Start="0,0"
+              End="0,31.6529423090001">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,31.6529423090001" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="162.4,41.6"
+          Id="Package\Plano lista precios"
+          TopLeft="409.714292691679,50.7764713003561" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

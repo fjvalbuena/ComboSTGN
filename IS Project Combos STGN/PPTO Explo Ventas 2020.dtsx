@@ -1,0 +1,635 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="9/17/2019 7:56:48 AM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="LAPTOP-MFGK5CPU"
+  DTS:CreatorName="LAPTOP-MFGK5CPU\fvalb"
+  DTS:DTSID="{1F321091-E515-473A-8F97-F96B165CFBF7}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="15.0.1300.371"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="PPTO Explo Ventas 2020"
+  DTS:PackageType="5"
+  DTS:VersionBuild="33"
+  DTS:VersionGUID="{F0037135-A8D0-4359-A969-5BFD485C6195}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[CostosB2B]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{47f7b160-f6d1-44fa-81a3-9ca9b4da8b32}"
+      DTS:ObjectName="CostosB2B">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=192.168.5.23;User ID=coUser;Initial Catalog=lkTCos;Provider=SQLNCLI11.1;Persist Security Info=True;Auto Translate=False;Application Name=SSIS-Package1-{B8F3234A-F7D6-42AF-B788-027A8DF2149F}SVIDBLUKMZ03.lukerFin;">
+          <DTS:Password
+            DTS:Name="Password"
+            Sensitive="1"
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAABzza3lYUhk+zt0zN8AZwQwAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAACnvKlA51/KH652EadhVEDkTcr2mAqff4BPQOqANxSluwAAAAAOgAAAAAIAACAAAADxwZ99dZkDqc/WynaG5OpjuE5XwEBunjQwh1WXYIN2zyAAAABfX7tQ2ky/itR5Wq/Lu4mF6iIk5JzlPDM3tED16qWQ0EAAAADstum+HGSdbB7V6kp+FkFsOGunncRfNuEB4R320RHJrdMdYYJHOJR61J+cUMqnkg6oKVJgN4PEK8ZmDoHCFTCr</DTS:Password>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[lukerVen]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{E36F3AB0-DFC1-4050-BF3C-8909FE389C41}"
+      DTS:ObjectName="lukerVen">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=192.168.5.23\B2C;User ID=ASSUser;Initial Catalog=lukerVen;Provider=SQLNCLI11.1;Persist Security Info=True;Auto Translate=False;Application Name=SSIS-Package1-{B8F3234A-F7D6-42AF-B788-027A8DF2149F}SVIDBLUKMZ03.lukerFin;">
+          <DTS:Password
+            DTS:Name="Password"
+            Sensitive="1"
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAABzza3lYUhk+zt0zN8AZwQwAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAABI0crhAcxnGBQa4rfPR3paS3vTJsSZV2NMUtx4fB+6fwAAAAAOgAAAAAIAACAAAACOMxCxn3nAvmsyi+09Qq4+V2ckdGAbwNN/hCP2LLEXrCAAAAD1lhD8sP0psNyg7q2q3Nb0s1kTbDA289pLHL1KM5PEOUAAAAAu6ORnIjCkmUD2WqOMPZQE54eKQcyTjOHp/+imR+01OIWSJPPi7OzXsTAzOw7lfI8/OTGAc7Ak1PebH7JpTtAM</DTS:Password>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[LukerVen_23w]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{E2FD2692-AB60-4B05-8A6D-A22A38EAAF70}"
+      DTS:ObjectName="LukerVen_23w">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=192.168.5.23\B2C;User ID=ASSUser;Initial Catalog=lukerVen;Provider=SQLNCLI11.1;Persist Security Info=True;Auto Translate=False;Application Name=SSIS-Package1-{B8F3234A-F7D6-42AF-B788-027A8DF2149F}SVIDBLUKMZ03.lukerFin;">
+          <DTS:Password
+            DTS:Name="Password"
+            Sensitive="1"
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAABzza3lYUhk+zt0zN8AZwQwAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAAB6efktMynIwHxeU7hUJxKy9zpmaVQgqhCyks8kg/V9GAAAAAAOgAAAAAIAACAAAABoHeE51F26kMgVN6vSh7kCH/mbO/2ajxXiwcSrIrETEyAAAAAe126mn6dgJc/9HoSAQvHP4oZ6x8oQ3L8oKYA98Mm8VUAAAAD3bq+WDrScJy9O0A64eveXu0S3SD2LHkCZFHF1QMj5CVMZktk9CUoPqdb18O75N4zUs8V4YzCXANUoJgRTnSZ+</DTS:Password>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\ajuste maquila"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Tarea Ejecutar SQL"
+      DTS:DTSID="{96FF820D-19F4-47D2-8D06-5CABA878BA73}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="ajuste maquila"
+      DTS:ThreadHint="5">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{E2FD2692-AB60-4B05-8A6D-A22A38EAAF70}"
+          SQLTask:SqlStatementSource="&#xA;update PresupuestoANUAL set&#xA; PresupuestoANUAL.Kilos= PresupuestoANUAL.Kilos/PresupuestoANUALtotMaquilaAseo.Kilos*AjusteMaquilasPosExplo.KilosTotales&#xA;FROM lukerVen.PPTO.AjusteMaquilasPosExplo AjusteMaquilasPosExplo, lukerVen.SD.Clientes Clientes, lukerVen.SD.PresupuestoANUAL PresupuestoANUAL, lukerVen.PPTO.PresupuestoANUALtotMaquilaAseo PresupuestoANUALtotMaquilaAseo, lukerVen.SD.Productos Productos&#xA;WHERE PresupuestoANUALtotMaquilaAseo.FechaCorte = PresupuestoANUAL.FechaCorte AND AjusteMaquilasPosExplo.ano = PresupuestoANUAL.ano AND AjusteMaquilasPosExplo.ano = PresupuestoANUALtotMaquilaAseo.ano AND AjusteMaquilasPosExplo.Linea = PresupuestoANUALtotMaquilaAseo.Linea AND AjusteMaquilasPosExplo.mes = PresupuestoANUALtotMaquilaAseo.mes AND AjusteMaquilasPosExplo.Nombre_GCliente_AD2 = PresupuestoANUALtotMaquilaAseo.Nombre_GCliente_AD2 AND Clientes.Cod_Cliente = PresupuestoANUAL.Cod_Cliente &#xA;AND Clientes.Nombre_GCliente_AD2 = AjusteMaquilasPosExplo.Nombre_GCliente_AD2 AND Productos.Cod_SKU = PresupuestoANUAL.Cod_SKU AND Productos.Linea = AjusteMaquilasPosExplo.Linea" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Base Estadistica"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Tarea Ejecutar SQL"
+      DTS:DTSID="{BD9D6007-441E-4764-934B-96B979B5A49E}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Base Estadistica"
+      DTS:ThreadHint="1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{E36F3AB0-DFC1-4050-BF3C-8909FE389C41}"
+          SQLTask:SqlStatementSource="err&#xA;USE [lukerVen]&#xA;GO&#xA;truncate table [lukerVen].[PPTO].[BaseEstadistica]&#xA;INSERT INTO [PPTO].[BaseEstadistica]&#xA;           ([Origen],[ano]&#xA;           ,[mes]&#xA;           ,[Cod_OrgVentas]&#xA;           ,[Cod_Cliente]&#xA;           ,[Cod_SKU]&#xA;           ,[Kilos])&#xA;&#xA;SELECT 'Est',&#xA;  year(Facturas.FechaFactura)&#xA;, month(Facturas.FechaFactura)&#xA;, Cod_OrgVentas&#xA;, Facturas.Cod_Cliente&#xA;&#xA;, case isnull(eq.Cod_SKU_Regular,'') when '' then Facturas.Cod_SKU else isnull(eq.Cod_SKU_Regular,'') end&#xA;, sum(Facturas.Kilos) as Kilos&#xA;FROM lukerVen.SD.[FacturasW] Facturas left outer join tmp.xppt_equiv_regu_promoEfctv eq on Cod_SKU_Promo = [Cod_SKU]&#xA;, lukerVen.PPTO.Parametros PVOFMesParametros&#xA;, lukerVen.SD.TipoDocumento TipoDocumento&#xA;,lukerVen.SD.Clientes Clientes&#xA;WHERE TipoDocumento.Cod_TipoFactura = Facturas.Cod_TipoFactura &#xA;and  Clientes.Cod_Cliente=Facturas.Cod_Cliente&#xA;AND ( (PVOFMesParametros.EstadoPresupuesto='ACT')&#xA;AND ((Facturas.FechaFactura&gt;=PVOFMesParametros.PeriodoEstI) AND (Facturas.FechaFactura&lt;=PVOFMesParametros.PeriodoEstF) )&#xA;--AND (TipoDocumento.NombreTipoDocumento Like 'Factura%') &#xA;) and Cod_OrgVentas in ('2010','1010')&#xA;and ( (Clientes.Estatus='Activo') or  (Clientes.Cod_Canal='16') )&#xA;group by &#xA;  year(Facturas.FechaFactura)&#xA;, month(Facturas.FechaFactura)&#xA;, Cod_OrgVentas&#xA;, Facturas.Cod_Cliente&#xA;, case isnull(eq.Cod_SKU_Regular,'') when '' then Facturas.Cod_SKU else isnull(eq.Cod_SKU_Regular,'') end&#xA;&#xA;having sum(Facturas.Kilos) &gt;0&#xA;&#xA;&#xA;update BaseEstadistica set&#xA;BaseEstadistica.ActivoProducto= 1&#xA;FROM lukerVen.PPTO.BaseEstadistica BaseEstadistica&#xA;, lukerVen.tmp.xppt_portafolio_prodEfctv xppt_portafolio_prodEfctv&#xA;WHERE xppt_portafolio_prodEfctv.Cod_SKU = BaseEstadistica.Cod_SKU&#xA;&#xA;&#xA;&#xA;insert into lukerVen.PPTO.BaseEstadistica&#xA;SELECT 'cln',BaseEstadistica.ano&#xA;, BaseEstadistica.mes, BaseEstadistica.Cod_OrgVentas, BaseEstadistica.Cod_Cliente, right('00000000000000000'+xppt_clones_estadistica.Cod_SKU_Orphn,18) AS 'skuClonado'&#xA;, sum(BaseEstadistica.Kilos)&#xA;, 1, 1&#xA;FROM lukerVen.PPTO.BaseEstadistica BaseEstadistica, lukerVen.dbo.xppt_clones_estadistica xppt_clones_estadistica&#xA;WHERE (right('0000000000000000'+xppt_clones_estadistica.Cod_SKU_Clonar,18)=BaseEstadistica.Cod_SKU) AND (right('0000000000'+xppt_clones_estadistica.Cod_Cliente_Clonar,10)=BaseEstadistica.Cod_Cliente)&#xA;group by &#xA;BaseEstadistica.ano&#xA;, BaseEstadistica.mes, BaseEstadistica.Cod_OrgVentas, BaseEstadistica.Cod_Cliente, right('00000000000000000'+xppt_clones_estadistica.Cod_SKU_Orphn,18)&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\calc unidades"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Tarea Ejecutar SQL"
+      DTS:DTSID="{F2B8C535-34B7-48D9-8210-0182AC6CE546}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="calc unidades"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{E2FD2692-AB60-4B05-8A6D-A22A38EAAF70}"
+          SQLTask:SqlStatementSource="update PresupuestoANUAL set&#xA;PresupuestoANUAL.Cantidad= PresupuestoANUAL.Kilos/(Productos.Peso_Neto_SKU/1000)&#xA;FROM lukerVen.SD.PresupuestoANUAL PresupuestoANUAL, lukerVen.SD.Productos Productos&#xA;WHERE Productos.Cod_SKU = PresupuestoANUAL.Cod_SKU AND ((PresupuestoANUAL.Cantidad&lt;&gt;PresupuestoANUAL.Kilos/(Productos.Peso_Neto_SKU/1000)))" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Carga Volumenes"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Tarea Ejecutar SQL"
+      DTS:DTSID="{824A84EA-083C-4C2D-90CE-632CECDA5ABD}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Carga Volumenes"
+      DTS:ThreadHint="2">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{E36F3AB0-DFC1-4050-BF3C-8909FE389C41}"
+          SQLTask:SqlStatementSource="ERR&#xA;&#xA;USE [lukerVen]&#xA;GO&#xA;&#xA;truncate table [lukerVen].[PPTO].[VolumenMeses]&#xA;INSERT INTO [PPTO].[VolumenMeses]&#xA;           ([ano]&#xA;           ,[JerarquiaDeProducto]&#xA;           ,[Cod_Canal]&#xA;           ,[Cod_GCliente]&#xA;           ,[Cod_GCliente_AD2]&#xA;           ,[JerN2]&#xA;           ,[kgEne]&#xA;           ,[kgFeb]&#xA;           ,[kgMar]&#xA;           ,[kgAbr]&#xA;           ,[kgMay]&#xA;           ,[kgJun]&#xA;           ,[kgJul]&#xA;           ,[kgAgo]&#xA;           ,[kgSep]&#xA;           ,[kgOct]&#xA;           ,[kgNov]&#xA;           ,[kgDic])&#xA;SELECT xppt_volumenppto_lcgg2n2.ano&#xA;, right('000000000000000000'+JerarquiaDeProducto,18)&#xA;, xppt_volumenppto_lcgg2n2.Cod_Canal&#xA;, xppt_volumenppto_lcgg2n2.Cod_GCliente&#xA;, right('00'+Cod_GCliente_AD2,2)&#xA;, xppt_volumenppto_lcgg2n2.JerN2&#xA;, xppt_volumenppto_lcgg2n2.kgEne, xppt_volumenppto_lcgg2n2.kgFeb, xppt_volumenppto_lcgg2n2.kgMar, xppt_volumenppto_lcgg2n2.kgAbr, xppt_volumenppto_lcgg2n2.kgMay, xppt_volumenppto_lcgg2n2.kgJun, xppt_volumenppto_lcgg2n2.kgJul, xppt_volumenppto_lcgg2n2.kgAgo, xppt_volumenppto_lcgg2n2.kgSep, xppt_volumenppto_lcgg2n2.kgOct, xppt_volumenppto_lcgg2n2.kgNov, xppt_volumenppto_lcgg2n2.kgDic&#xA;FROM lukerVen.dbo.xppt_volumenppto_lcgg2n2 xppt_volumenppto_lcgg2n2&#xA;&#xA;-- Marca Huerfano&#xA;update VolumenMeses set&#xA;VolumenMeses.Orphan= 0&#xA;FROM lukerVen.PPTO.BaseOrphan BaseOrphan, lukerVen.PPTO.VolumenMeses VolumenMeses&#xA;WHERE VolumenMeses.Cod_Canal = BaseOrphan.Cod_Canal &#xA;AND VolumenMeses.Cod_GCliente = BaseOrphan.Cod_GCliente &#xA;AND VolumenMeses.Cod_GCliente_AD2 = BaseOrphan.Cod_GCliente_AD2 &#xA;AND VolumenMeses.JerarquiaDeProducto = BaseOrphan.JerarquiaProducto &#xA;AND VolumenMeses.JerN2 = BaseOrphan.JerN2" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\convierte EyE"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Tarea Ejecutar SQL"
+      DTS:DTSID="{184614B7-70EF-4B63-94FC-17328B5FA0BF}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="convierte EyE"
+      DTS:ThreadHint="4">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{E2FD2692-AB60-4B05-8A6D-A22A38EAAF70}"
+          SQLTask:BypassPrepare="False"
+          SQLTask:SqlStatementSource="update PresupuestoANUAL set PresupuestoANUAL.Cod_SKU= ppto2020EquivalenciaEYE.Cod_SKU_Reg&#xA;, PresupuestoANUAL.origen='EyE'+right(PresupuestoANUAL.Cod_SKU,4)&#xA;FROM lukerVen.PPTO.ppto2020EquivalenciaEYE ppto2020EquivalenciaEYE, lukerVen.SD.PresupuestoANUAL PresupuestoANUAL&#xA;WHERE PresupuestoANUAL.Cod_SKU = ppto2020EquivalenciaEYE.Cod_SKU_EYE" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Explo"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Tarea Ejecutar SQL"
+      DTS:DTSID="{46A83018-9777-4203-B6CE-05815BD26387}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Explo"
+      DTS:ThreadHint="3">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{E36F3AB0-DFC1-4050-BF3C-8909FE389C41}"
+          SQLTask:SqlStatementSource="err&#xA;&#xA;USE [lukerVen]&#xA;GO&#xA;&#xA;/****** Object:  StoredProcedure [dbo].[explvenpptofi]    Script Date: 9/18/2019 2:39:53 PM ******/&#xA;SET ANSI_NULLS ON&#xA;GO&#xA;&#xA;SET QUOTED_IDENTIFIER ON&#xA;GO&#xA;&#xA;--CREATE OR ALTER procedure [dbo].[explvenpptofi] as&#xA;truncate table [PPTO].[BaseEstadisticaTot_lcgg2jn2]&#xA;insert into [PPTO].[BaseEstadisticaTot_lcgg2jn2]&#xA;SELECT BaseEstadisticaTot_lcgg2jn2.ano, BaseEstadisticaTot_lcgg2jn2.JerarquiaProducto, BaseEstadisticaTot_lcgg2jn2.Cod_Canal, BaseEstadisticaTot_lcgg2jn2.Cod_GCliente, BaseEstadisticaTot_lcgg2jn2.Cod_GCliente_AD2, BaseEstadisticaTot_lcgg2jn2.JerN2, BaseEstadisticaTot_lcgg2jn2.Kilos, BaseEstadisticaTot_lcgg2jn2.KilosPM&#xA;FROM lukerVen.tmp.BaseEstadisticaTot_lcgg2jn2 BaseEstadisticaTot_lcgg2jn2&#xA;&#xA;truncate table [lukerVen].[SD].[PresupuestoANUAL]&#xA;INSERT INTO [SD].[PresupuestoANUAL]&#xA;   &#xA;SELECT 'B2C',&#xA;VolumenMeses.ano&#xA;,  cast(rtrim(str(VolumenMeses.ano))+meses.corteS as smalldatetime )&#xA;,  BaseEstadisticaTM.Cod_Cliente&#xA;, VolumenMeses.JerarquiaDeProducto&#xA;, BaseEstadisticaTM.Cod_SKU&#xA;, case meses.id &#xA;    when 1 then VolumenMeses.kgEne &#xA;    when 2 then VolumenMeses.kgFeb &#xA;    when 3 then VolumenMeses.kgMar&#xA;    when 4 then VolumenMeses.kgAbr&#xA;    when 5 then VolumenMeses.kgMay&#xA;    when 6 then VolumenMeses.kgJun&#xA;    when 7 then VolumenMeses.kgJul&#xA;    when 8 then VolumenMeses.kgAgo&#xA;    when 9 then VolumenMeses.kgSep&#xA;    when 10 then VolumenMeses.kgOct&#xA;    when 11 then VolumenMeses.kgNov&#xA;    when 12 then VolumenMeses.kgDic&#xA;  else 0 end / BaseEstadisticaTot_lcgg2jn2.KilosPM* ( BaseEstadisticaTM.Kilos/BaseEstadisticaTM.mes) ,0&#xA;FROM lukerVen.PPTO.BaseEstadisticaTM BaseEstadisticaTM&#xA;, lukerVen.PPTO.BaseEstadisticaTot_lcgg2jn2 BaseEstadisticaTot_lcgg2jn2&#xA;, lukerVen.SD.Clientes Clientes&#xA;, lukerVen.dbo.meses meses&#xA;, lukerVen.SD.Productos Productos&#xA;, lukerVen.PPTO.VolumenMeses VolumenMeses&#xA;WHERE BaseEstadisticaTot_lcgg2jn2.Cod_Canal = VolumenMeses.Cod_Canal &#xA;AND BaseEstadisticaTot_lcgg2jn2.Cod_GCliente = VolumenMeses.Cod_GCliente &#xA;AND BaseEstadisticaTot_lcgg2jn2.Cod_GCliente_AD2 = VolumenMeses.Cod_GCliente_AD2 &#xA;AND BaseEstadisticaTot_lcgg2jn2.JerarquiaDeProducto = VolumenMeses.JerarquiaDeProducto &#xA;AND BaseEstadisticaTot_lcgg2jn2.JerN2 = VolumenMeses.JerN2 &#xA;AND Clientes.Cod_Cliente = BaseEstadisticaTM.Cod_Cliente &#xA;AND VolumenMeses.Cod_Canal = Clientes.Cod_Canal &#xA;AND VolumenMeses.Cod_GCliente = Clientes.Cod_GCliente &#xA;AND VolumenMeses.Cod_GCliente_AD2 = Clientes.Cod_GCliente_AD2 &#xA;AND VolumenMeses.JerN2 = Clientes.JerN2 &#xA;AND Productos.Cod_SKU = BaseEstadisticaTM.Cod_SKU &#xA;AND VolumenMeses.JerarquiaDeProducto = Productos.JerarquiaProducto &#xA;AND ((meses.id&lt;&gt;0))&#xA;GO&#xA;&#xA;&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Tarea Flujo de datos"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Tarea Flujo de datos"
+      DTS:DTSID="{28EE9636-D98F-43A7-95F1-B3BDC7C93E98}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Tarea Flujo de datos"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Tarea Flujo de datos\Origen de OLE DB"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="Origen de OLE DB;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;7"
+              description="Origen de OLE DB"
+              name="Origen de OLE DB"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="Número de segundos antes de que se agote el tiempo de espera de un comando. Un valor de 0 indica un tiempo de espera infinito."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica el nombre del objeto de base de datos usado para abrir un conjunto de filas."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Especifica la variable que contiene el nombre del objeto de base de datos usado para abrir un conjunto de filas."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="Comando SQL para ejecutar."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT Productos.Cod_SKU, Productos.Nombre_SKU, Productos.Categoria, Productos.Linea
+FROM lukerVen.SD.Productos Productos
+WHERE (Productos.Aliado='CASA LUKER') AND (Productos.Categoria In ('DERIVADOS DEL CACAO','VALORAGREGADO','COMMODITIES'))</property>
+                <property
+                  dataType="System.String"
+                  description="Variable que contiene el comando SQL para ejecutar."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica la página de códigos de columna para utilizar cuando la información de página de códigos no está disponible en el origen de datos."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Fuerza el uso del valor de la propiedad DefaultCodePage al describir datos de caracteres."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica el modo utilizado para obtener acceso a la base de datos."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="Asignaciones entre los parámetros del comando SQL y las variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Tarea Flujo de datos\Origen de OLE DB.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[LukerVen_23w]"
+                  connectionManagerRefId="Package.ConnectionManagers[LukerVen_23w]"
+                  description="La conexión de tiempo de ejecución OLE DB usada para obtener acceso a la base de datos."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de origen de OLE DB]"
+                  name="Salida de origen de OLE DB">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[Cod_SKU]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[Cod_SKU]"
+                      length="18"
+                      lineageId="Package\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[Cod_SKU]"
+                      name="Cod_SKU"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[Nombre_SKU]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[Nombre_SKU]"
+                      length="40"
+                      lineageId="Package\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[Nombre_SKU]"
+                      name="Nombre_SKU"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[Categoria]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[Categoria]"
+                      length="40"
+                      lineageId="Package\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[Categoria]"
+                      name="Categoria"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[Linea]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[Linea]"
+                      length="40"
+                      lineageId="Package\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[Linea]"
+                      name="Linea"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[Cod_SKU]"
+                      codePage="1252"
+                      dataType="str"
+                      length="18"
+                      name="Cod_SKU" />
+                    <externalMetadataColumn
+                      refId="Package\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[Nombre_SKU]"
+                      dataType="wstr"
+                      length="40"
+                      name="Nombre_SKU" />
+                    <externalMetadataColumn
+                      refId="Package\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[Categoria]"
+                      codePage="1252"
+                      dataType="str"
+                      length="40"
+                      name="Categoria" />
+                    <externalMetadataColumn
+                      refId="Package\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[Linea]"
+                      codePage="1252"
+                      dataType="str"
+                      length="40"
+                      name="Linea" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB]"
+                  isErrorOut="true"
+                  name="Salida de error de origen de OLE DB">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[Cod_SKU]"
+                      codePage="1252"
+                      dataType="str"
+                      length="18"
+                      lineageId="Package\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[Cod_SKU]"
+                      name="Cod_SKU" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[Nombre_SKU]"
+                      dataType="wstr"
+                      length="40"
+                      lineageId="Package\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[Nombre_SKU]"
+                      name="Nombre_SKU" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[Categoria]"
+                      codePage="1252"
+                      dataType="str"
+                      length="40"
+                      lineageId="Package\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[Categoria]"
+                      name="Categoria" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[Linea]"
+                      codePage="1252"
+                      dataType="str"
+                      length="40"
+                      lineageId="Package\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[Linea]"
+                      name="Linea" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Tarea Flujo de datos\SKU"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="Destino de OLE DB;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;4"
+              description="Destino de OLE DB"
+              name="SKU"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="Número de segundos antes de que se agote el tiempo de espera de un comando. Un valor de 0 indica un tiempo de espera infinito."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica el nombre del objeto de base de datos usado para abrir un conjunto de filas."
+                  name="OpenRowset">[SKU]</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica la variable que contiene el nombre del objeto de base de datos usado para abrir un conjunto de filas."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="Comando SQL para ejecutar."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica la página de códigos de columna para utilizar cuando la información de página de códigos no está disponible en el origen de datos."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Fuerza el uso del valor de la propiedad DefaultCodePage al describir datos de caracteres."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica el modo utilizado para obtener acceso a la base de datos."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indica si los valores proporcionados para columnas de identidad se van a copiar al destino. Si es False, los valores de las columnas de identidad se generan automáticamente en el destino. Solo se aplica si está activada la carga rápida."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indica si las columnas que contienen NULL tendrán NULL insertado en el destino. Si es False, las columnas que contienen NULL tendrán sus valores predeterminados insertados en el destino. Solo se aplica si está activada la carga rápida."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica opciones para usar con la carga rápida. Solo se aplica si está activada la carga rápida."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica cuándo se emiten confirmaciones durante la inserción de datos. El valor 0 especifica que se emitirá una confirmación al final de la inserción de datos. Solo se aplica si está activada la carga rápida."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Tarea Flujo de datos\SKU.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[CostosB2B]"
+                  connectionManagerRefId="Package.ConnectionManagers[CostosB2B]"
+                  description="La conexión de tiempo de ejecución OLE DB usada para obtener acceso a la base de datos."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Tarea Flujo de datos\SKU.Inputs[Entrada de destino de OLE DB]"
+                  errorOrTruncationOperation="Insertar"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="Entrada de destino de OLE DB">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Tarea Flujo de datos\SKU.Inputs[Entrada de destino de OLE DB].Columns[Cod_SKU]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="18"
+                      cachedName="Cod_SKU"
+                      externalMetadataColumnId="Package\Tarea Flujo de datos\SKU.Inputs[Entrada de destino de OLE DB].ExternalColumns[Cod_SKU]"
+                      lineageId="Package\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[Cod_SKU]" />
+                    <inputColumn
+                      refId="Package\Tarea Flujo de datos\SKU.Inputs[Entrada de destino de OLE DB].Columns[Nombre_SKU]"
+                      cachedDataType="wstr"
+                      cachedLength="40"
+                      cachedName="Nombre_SKU"
+                      externalMetadataColumnId="Package\Tarea Flujo de datos\SKU.Inputs[Entrada de destino de OLE DB].ExternalColumns[Nombre_SKU]"
+                      lineageId="Package\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[Nombre_SKU]" />
+                    <inputColumn
+                      refId="Package\Tarea Flujo de datos\SKU.Inputs[Entrada de destino de OLE DB].Columns[Categoria]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="40"
+                      cachedName="Categoria"
+                      externalMetadataColumnId="Package\Tarea Flujo de datos\SKU.Inputs[Entrada de destino de OLE DB].ExternalColumns[Categoria]"
+                      lineageId="Package\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[Categoria]" />
+                    <inputColumn
+                      refId="Package\Tarea Flujo de datos\SKU.Inputs[Entrada de destino de OLE DB].Columns[Linea]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="40"
+                      cachedName="Linea"
+                      externalMetadataColumnId="Package\Tarea Flujo de datos\SKU.Inputs[Entrada de destino de OLE DB].ExternalColumns[Linea]"
+                      lineageId="Package\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[Linea]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Tarea Flujo de datos\SKU.Inputs[Entrada de destino de OLE DB].ExternalColumns[Cod_SKU]"
+                      codePage="1252"
+                      dataType="str"
+                      length="18"
+                      name="Cod_SKU" />
+                    <externalMetadataColumn
+                      refId="Package\Tarea Flujo de datos\SKU.Inputs[Entrada de destino de OLE DB].ExternalColumns[Nombre_SKU]"
+                      dataType="wstr"
+                      length="40"
+                      name="Nombre_SKU" />
+                    <externalMetadataColumn
+                      refId="Package\Tarea Flujo de datos\SKU.Inputs[Entrada de destino de OLE DB].ExternalColumns[Categoria]"
+                      codePage="1252"
+                      dataType="str"
+                      length="40"
+                      name="Categoria" />
+                    <externalMetadataColumn
+                      refId="Package\Tarea Flujo de datos\SKU.Inputs[Entrada de destino de OLE DB].ExternalColumns[Linea]"
+                      codePage="1252"
+                      dataType="str"
+                      length="40"
+                      name="Linea" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Tarea Flujo de datos\SKU.Outputs[Salida de error de destino de OLE DB]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Salida de error de destino de OLE DB"
+                  synchronousInputId="Package\Tarea Flujo de datos\SKU.Inputs[Entrada de destino de OLE DB]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos\SKU.Outputs[Salida de error de destino de OLE DB].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Tarea Flujo de datos\SKU.Outputs[Salida de error de destino de OLE DB].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos\SKU.Outputs[Salida de error de destino de OLE DB].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Tarea Flujo de datos\SKU.Outputs[Salida de error de destino de OLE DB].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Tarea Flujo de datos.Paths[Salida de origen de OLE DB]"
+              endId="Package\Tarea Flujo de datos\SKU.Inputs[Entrada de destino de OLE DB]"
+              name="Salida de origen de OLE DB"
+              startId="Package\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de origen de OLE DB]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--Esta sección CDATA contiene la información de diseño del paquete. Esta sección incluye información como, por ejemplo, las coordenadas (x,y), el ancho y el alto.-->
+<!--Si edita manualmente esta sección y comete un error, puede eliminarlo. -->
+<!--El paquete podrá cargarse normalmente, pero se perderá la información de diseño anterior y el diseñador reorganizará los elementos automáticamente en la superficie de diseño.-->
+<Objects
+  Version="8">
+  <!--Cada uno de los nodos siguientes contiene propiedades que no afectan al comportamiento en tiempo de ejecución.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="153.6,41.6"
+          Id="Package\Base Estadistica"
+          TopLeft="4.92857141884008,5.49999999999984" />
+        <NodeLayout
+          Size="160.8,41.6"
+          Id="Package\Carga Volumenes"
+          TopLeft="219.9,5.49999999999984" />
+        <NodeLayout
+          Size="104,41.6"
+          Id="Package\Explo"
+          TopLeft="441.3,5.49999999999984" />
+        <NodeLayout
+          Size="175.2,41.6"
+          Id="Package\Tarea Flujo de datos"
+          TopLeft="22.2857146652377,99.1058837428638" />
+        <NodeLayout
+          Size="142.4,41.6"
+          Id="Package\convierte EyE"
+          TopLeft="380.571435052522,212.282355918356" />
+        <NodeLayout
+          Size="141.6,41.6"
+          Id="Package\calc unidades"
+          TopLeft="128.571430760987,234.917650353455" />
+        <NodeLayout
+          Size="147.2,41.6"
+          Id="Package\ajuste maquila"
+          TopLeft="410.857149853998,359.717652103728" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Tarea Flujo de datos">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="163.2,41.6"
+          Id="Package\Tarea Flujo de datos\Origen de OLE DB"
+          TopLeft="61.7142867652737,78.3058834511516" />
+        <NodeLayout
+          Size="97.6,41.6"
+          Id="Package\Tarea Flujo de datos\SKU"
+          TopLeft="94.2857158913904,152.94117861553" />
+        <EdgeLayout
+          Id="Package\Tarea Flujo de datos.Paths[Salida de origen de OLE DB]"
+          TopLeft="143.200001328332,119.905883451152">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,33.0352951643788"
+              Start="0,0"
+              End="0,25.5352951643788">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,25.5352951643788" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Tarea Flujo de datos\Origen de OLE DB">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Tarea Flujo de datos\SKU">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
